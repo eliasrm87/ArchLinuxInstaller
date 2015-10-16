@@ -107,9 +107,9 @@ yesno=$(yesnoBox "Resumen" "Se van a instalar los siguientes paquetes:\n\n$packa
 reset
 if [ "$yesno" == "0" ]; then
     pacstrap /mnt $packages
+    genfstab -U -p /mnt >> /mnt/etc/fstab
 fi
 
-genfstab -U -p /mnt >> /mnt/etc/fstab
 mkdir /mnt/ArchLinuxInstaller
 wget https://raw.githubusercontent.com/IgekoSC/ArchLinuxInstaller/master/chroot.sh -O /mnt/ArchLinuxInstaller/chroot.sh
 chmod +x /mnt/ArchLinuxInstaller/chroot.sh
