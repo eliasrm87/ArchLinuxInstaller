@@ -33,15 +33,19 @@ ln -s /usr/share/zoneinfo/$continent/$zone /etc/localtime
 
 backtitle="Instalación del sistema base 2/3 - Localización"
 
-locale=""
-while [ -z "$locale" ]; do
-    locale=$(menuBox "Seleccione su localización" "$(cat /etc/locale.gen | grep -e "^#[a-z]\{2,3\}_[A-Z]\{2\}.*" | tr -d "#" | awk '{print $1,$2}')" 15 50)
-done
-echo $localeip
+if [ ! -f /etc/locale.conf ]; then
+    yesno=$(yesnoBox "Localización" "¿Desea cambiar la localización?")
+    if [ "$yesno" == "0" ]; then
+        locale=""
+        while [ -z "$locale" ]; do
+            locale=$(menuBox "Seleccione su localización" "$(cat /etc/locale.gen | grep -e "^#[a-z]\{2,3\}_[A-Z]\{2\}.*" | tr -d "#" | awk '{print $1,$2}')" 15 50)
+        done
 
-echo "LANG=$locale" > /etc/locale.conf
-sed -i "s/^#$locale/$locale/g" /etc/locale.gen
-locale-gen
+        echo "LANG=$locale" > /etc/locale.conf
+        sed -i "s/^#$locale/$locale/g" /etc/locale.gen
+        locale-gen
+    fi
+fi
 
 backtitle="Instalación del sistema base 2/3 - GRUB ($uefi)"
 
