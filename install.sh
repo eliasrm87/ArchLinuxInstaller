@@ -24,7 +24,7 @@ function mountFormatPartition {
             if [ "$yesno" == "0" ]; then
                 format=""
                 if [ "$uefi" == "uefi" ] && [ "$1" == "/boot" ]; then
-                    format="fat"
+                    format="fat -F32"
                 else
                     format=$(menuBoxN "Seleccione el sistema de archivos para formatear $partition" "ext4 ext3 ext2 fat exfat" 15 50)
                 fi
@@ -50,7 +50,7 @@ function mountFormatPartition {
 #     wifi-menu
 # fi
 
-uefi=$(efivar -l 2>&1 | grep -c "error")
+uefi=$(efivar -l 2>&1 | grep -c "error listing")
 if [ "$uefi" == "0" ]; then
     uefi="uefi"
 else
