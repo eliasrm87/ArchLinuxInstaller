@@ -1,6 +1,6 @@
 #! /bin/bash
 
-source $(pwd -P)/utils.sh
+source $( cd "$( dirname "$0" )" && pwd )/utils.sh
 
 # Preconfiguration
 
