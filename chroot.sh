@@ -33,7 +33,7 @@ ln -s /usr/share/zoneinfo/$continent/$zone /etc/localtime
 
 backtitle="Instalación del sistema base 2/3 - Localización"
 
-if [ ! -f /etc/locale.conf ]; then
+if [ -f /etc/locale.conf ]; then
     yesno=$(yesnoBox "Localización" "¿Desea cambiar la localización?")
     if [ "$yesno" == "0" ]; then
         locale=""
