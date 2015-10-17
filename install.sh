@@ -24,15 +24,18 @@ function mountFormatPartition {
             if [ "$yesno" == "0" ]; then
                 format=""
                 if [ "$uefi" == "uefi" ] && [ "$1" == "/boot" ]; then
-                    format="fat -F32"
+                    format="fat"
                 else
                     format=$(menuBoxN "Seleccione el sistema de archivos para formatear $partition" "ext4 ext3 ext2 fat exfat" 15 50)
                 fi
                 if [ -n "$format" ]; then
                     yesno=$(yesnoBox "¡ATENCIÓN!" "¿Está seguro de que desea formatear $partition ($1) en $format?\n¡SE PERDERÁN TODOS LOS DATOS!")
                     if [ "$yesno" == "0" ]; then
+                        if [ "$format" == "fat" ]; then
+                            format="fat -F32"
+                        fi
                         reset
-                        mkfs -t $format /dev/$partition
+                        mkfs.$format /dev/$partition
                     fi
                 fi
             fi
@@ -50,11 +53,9 @@ function mountFormatPartition {
 #     wifi-menu
 # fi
 
-uefi=$(efivar -l 2>&1 | grep -c "error listing")
-if [ "$uefi" == "0" ]; then
+uefi="legacy"
+if [ -e /sys/firmware/efi ]; then
     uefi="uefi"
-else
-    uefi="legacy"
 fi
 
 backtitle="Particiones - Creación"
@@ -116,4 +117,4 @@ chmod +x /mnt/ArchLinuxInstaller/chroot.sh
 cp ./utils.sh /mnt/ArchLinuxInstaller/
 arch-chroot /mnt "/ArchLinuxInstaller/chroot.sh" $uefi
 reset
-umount /mnt/{boot,home,}
+umount -R /mnt

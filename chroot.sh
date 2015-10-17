@@ -2,7 +2,6 @@
 
 source $( cd "$( dirname "$0" )" && pwd )/utils.sh
 
-# Preconfiguration
 
 uefi=$1
 
@@ -50,18 +49,24 @@ fi
 
 backtitle="Instalación del sistema base 2/3 - GRUB ($uefi)"
 
-
-if [ -n "$device" ]; then
+yesno=$(yesnoBox "Localización" "¿Desea instalar cargador de arranque GRUB?")
+if [ "$yesno" == "0" ]; then
     if [ "$uefi" == "uefi" ]; then
         reset
         grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=arch_grub --recheck
         grub-mkconfig -o /boot/grub/grub.cfg
+        mkinitcpio -p linux
+        #UEFI firmware workaround - https://wiki.archlinux.org/index.php/GRUB#UEFI_firmware_workaround
+        mkdir /boot/EFI/boot
+        cp /boot/EFI/grub_uefi/grubx64.efi /boot/EFI/boot/bootx64.efi
     else
         device=$(menuBox "Seleccione el disco en el que desea instalar el cargador de arranque GRUB:" "$(lsblk -l | grep disk | awk '{print $1,$4}')" 10 50)
-        reset
-        grub-install /dev/$device
-        grub-mkconfig -o /boot/grub/grub.cfg
-        mkinitcpio -p linux
+        if [ -n "$device" ]; then
+            reset
+            grub-install /dev/$device
+            grub-mkconfig -o /boot/grub/grub.cfg
+            mkinitcpio -p linux
+        fi
     fi
 fi
 
