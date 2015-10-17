@@ -58,7 +58,7 @@ if [ "$yesno" == "0" ]; then
         mkinitcpio -p linux
         #UEFI firmware workaround - https://wiki.archlinux.org/index.php/GRUB#UEFI_firmware_workaround
         mkdir /boot/EFI/boot
-        cp /boot/EFI/grub_uefi/grubx64.efi /boot/EFI/boot/bootx64.efi
+        cp /boot/EFI/arch_grub/grubx64.efi /boot/EFI/boot/bootx64.efi
     else
         device=$(menuBox "Seleccione el disco en el que desea instalar el cargador de arranque GRUB:" "$(lsblk -l | grep disk | awk '{print $1,$4}')" 10 50)
         if [ -n "$device" ]; then
