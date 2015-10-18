@@ -46,14 +46,14 @@ function yesnoBox {
     echo $?
 }
 
-function infoBox {
+function msgBox {
     h=8
     w=50
     
-    if [ "$#" -gt "1" ]; then h=$2; fi
-    if [ "$#" -gt "2" ]; then w=$3; fi
+    if [ "$#" -gt "2" ]; then h=$3; fi
+    if [ "$#" -gt "3" ]; then w=$4; fi
     
-    dialog --backtitle "$backtitle" --infobox "$1" $h $w
+    dialog --backtitle "$backtitle"  --title "$1" --msgbox "$2" $h $w
 }
 
 function inputBox {

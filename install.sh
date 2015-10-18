@@ -4,6 +4,7 @@ wget https://raw.githubusercontent.com/IgekoSC/ArchLinuxInstaller/master/utils.s
 
 source $( cd "$( dirname "$0" )" && pwd )/utils.sh
 
+
 function mountFormatPartition {
     backtitle="Particiones - Puntos de motaje y formato ($uefi)"
 
@@ -24,16 +25,13 @@ function mountFormatPartition {
             if [ "$yesno" == "0" ]; then
                 format=""
                 if [ "$uefi" == "uefi" ] && [ "$1" == "/boot" ]; then
-                    format="fat"
+                    format="fat -F32"
                 else
-                    format=$(menuBoxN "Seleccione el sistema de archivos para formatear $partition" "ext4 ext3 ext2 fat exfat" 15 50)
+                    format=$(menuBoxN "Seleccione el sistema de archivos para formatear $partition" "$(ls /bin/mkfs.* | cut -d "." -f2)" 15 50)
                 fi
                 if [ -n "$format" ]; then
                     yesno=$(yesnoBox "¡ATENCIÓN!" "¿Está seguro de que desea formatear $partition ($1) en $format?\n¡SE PERDERÁN TODOS LOS DATOS!")
                     if [ "$yesno" == "0" ]; then
-                        if [ "$format" == "fat" ]; then
-                            format="fat -F32"
-                        fi
                         reset
                         mkfs.$format /dev/$partition
                     fi
@@ -46,17 +44,14 @@ function mountFormatPartition {
     fi
 }
 
-# backtitle="Conección a Internet"
-# 
-# yesno=$(yesnoBox "WiFi" "¿Desea conectarse a alguna red WiFi?")
-# if [ "$yesno" == "0" ]; then
-#     wifi-menu
-# fi
-
 uefi="legacy"
 if [ -e /sys/firmware/efi ]; then
     uefi="uefi"
 fi
+
+backtitle="Script de instalación de ArchLinux Igeko v.0.0.1"
+
+msgBox "Bienvenido" "Este script actúa como guia de apoyo durante el proceso de instalación de ArchLinux. En cualquier momento puede detenerlo presionando Ctrl+C." 10 50
 
 backtitle="Particiones - Creación"
 
@@ -80,31 +75,36 @@ mountFormatPartition "/home"
 
 backtitle="Particiones - SWAP"
 
-partition=$(menuBox "Seleccione la partición que desea usar como SWAP:" "$(lsblk -l | grep part | awk '{print $1,$4}')" 15 50)
-if [ -n "$partition" ]; then
-    yesno=$(yesnoBox "¡ATENCIÓN!" "¿Está seguro de que desea formatear y activar $partition como SWAP?\n¡SE PERDERÁN TODOS LOS DATOS!")
-    if [ "$yesno" == "0" ]; then
-        reset
-        mkswap /dev/$partition
-        swapon /dev/$partition
+yesno=$(yesnoBox "Synaptics" "¿Desea usar una partición como SWAP?")
+if [ "$yesno" == "0" ]; then
+    partition=$(menuBox "Seleccione la partición que desea usar como SWAP:" "$(lsblk -l | grep part | awk '{print $1,$4}')" 15 50)
+    if [ -n "$partition" ]; then
+        yesno=$(yesnoBox "¡ATENCIÓN!" "¿Está seguro de que desea formatear y activar $partition como SWAP?\n¡SE PERDERÁN TODOS LOS DATOS!")
+        if [ "$yesno" == "0" ]; then
+            reset
+            mkswap /dev/$partition
+            swapon /dev/$partition
+        fi
     fi
 fi
 
-backtitle="Instalación del sistema base 1/3 - Sistema base"
+backtitle="Conección a Internet"
 
-packages="base base-devel networkmanager dialog wget vim"
+yesno=$(yesnoBox "WiFi" "¿Desea conectarse a alguna red WiFi?")
+if [ "$yesno" == "0" ]; then
+    wifi-menu
+fi
+
+backtitle="Instalación del sistema base"
+
+packages="base base-devel networkmanager os-prober dialog wget vim"
 if [ "$uefi" == "uefi" ]; then
     packages="$packages efibootmgr grub"
 else
     packages="$packages grub-bios"
 fi
 
-yesno=$(yesnoBox "Synaptics" "¿Tiene este ordeandor un TouchPad Synaptics?")
-if [ "$yesno" == "0" ]; then
-    packages="$packages xf86-input-synaptics"
-fi
-
-yesno=$(yesnoBox "Resumen" "Se van a instalar los siguientes paquetes:\n\n$packages\n\n¿Desea continuar?" 20 50)
+yesno=$(yesnoBox "Resumen" "Se van a instalar los siguientes paquetes:\n\n$packages\n\n¿Desea continuar?" 15 50)
 reset
 if [ "$yesno" == "0" ]; then
     pacstrap /mnt $packages
@@ -117,4 +117,9 @@ chmod +x /mnt/ArchLinuxInstaller/chroot.sh
 cp ./utils.sh /mnt/ArchLinuxInstaller/
 arch-chroot /mnt "/ArchLinuxInstaller/chroot.sh" $uefi
 reset
-umount -R /mnt
+yesno=$(yesnoBox "Instalación finalizada" "La instalación del sistema base ha finalizado. Si todo ha ido bien, tras reiniciar, debería poder iniciar el sistema recién instalado.\n\n¿Desea desmontar unidades y reiniciar?" 10 50)
+reset
+if [ "$yesno" == "0" ]; then
+    umount -R /mnt
+    reboot
+fi

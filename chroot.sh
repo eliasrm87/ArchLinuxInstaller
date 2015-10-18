@@ -7,20 +7,20 @@ uefi=$1
 
 export LANG="es_ES.UTF-8"
 
-backtitle="Instalación del sistema base 2/3 - Configuración del teclado"
+backtitle="Configuración del sistema base - Configuración del teclado"
 
 keymap=$(menuBoxN "Seleccione su esquema de teclado:" "$(ls /usr/share/kbd/keymaps/i386/qwerty | cut -d "." -f1)" 20 50)
 if [ -z "$keymap" ]; then exit; fi
 loadkeys $keymap
 echo "KEYMAP=$keymap" > /etc/vconsole.conf
 
-backtitle="Instalación del sistema base 2/3 - Hostname"
+backtitle="Configuración del sistema base - Hostname"
 
 hostname=$(inputBox "Introduce un nombre para este equipo (hostname)")
 
 echo $hostname > /etc/hostname
 
-backtitle="Instalación del sistema base 2/3 - Zona horaria"
+backtitle="Configuración del sistema base - Zona horaria"
 
 zone=""
 continent=""
@@ -30,7 +30,7 @@ while [ -z "$zone" ]; do
 done
 ln -s /usr/share/zoneinfo/$continent/$zone /etc/localtime
 
-backtitle="Instalación del sistema base 2/3 - Localización"
+backtitle="Configuración del sistema base - Localización"
 
 yesno="0"
 if [ -f /etc/locale.conf ]; then
@@ -47,7 +47,7 @@ if [ "$yesno" == "0" ]; then
     locale-gen
 fi
 
-backtitle="Instalación del sistema base 2/3 - GRUB ($uefi)"
+backtitle="Cargador de arranque - GRUB ($uefi)"
 
 yesno=$(yesnoBox "Localización" "¿Desea instalar cargador de arranque GRUB?")
 if [ "$yesno" == "0" ]; then
