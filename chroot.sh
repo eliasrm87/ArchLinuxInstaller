@@ -71,3 +71,5 @@ if [ "$yesno" == "0" ]; then
 fi
 
 passwd
+
+wget https://raw.githubusercontent.com/IgekoSC/ArchLinuxInstaller/master/firstStart.sh -O /ArchLinuxInstaller/firstStart.sh
