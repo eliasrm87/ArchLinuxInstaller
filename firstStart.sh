@@ -152,6 +152,8 @@ if [ "$yesno" == "0" ]; then
     pacman -S ttf-liberation ttf-bitstream-vera ttf-dejavu ttf-droid ttf-freefont artwiz-fonts
 fi
 
+backtitle="Escritorio"
+
 yesno=$(yesnoBox "Escritorio" "¿Desea instalar un escritorio?")
 if [ "$yesno" == "0" ]; then
 
