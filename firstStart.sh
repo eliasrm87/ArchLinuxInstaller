@@ -48,7 +48,7 @@ if [ -n "$n" ]; then
 fi
 
 
-backtitle="Conección a Internet"
+backtitle="Conexión a Internet"
 
 yesno=$(yesnoBox "WiFi" "¿Desea conectarse a alguna red WiFi?")
 if [ "$yesno" == "0" ]; then
