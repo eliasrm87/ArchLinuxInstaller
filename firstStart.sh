@@ -25,9 +25,32 @@ msgBox "Bienvenido de nuevo" "La instalación del sistema base ha finalizado. A 
 reset
 systemctl start NetworkManager.service
 systemctl enable NetworkManager.service
+
+backtitle="Conexión a Internet"
+
+connected=-1
+yesno=$(yesnoBox "WiFi" "¿Desea conectarse a alguna red WiFi?")
+while [ "$connected" != "0" ]; do
+    if [ "$yesno" == "0" ]; then
+        ssid=$(menuBoxN "Seleccione la red WiFi a la que desea conectarse" "$(nmcli dev wifi list | grep -v "SSID" | tr "*" " " | awk '{print $1}')" 15 50)
+        password=$(inputBox "Introduce la contraseña de para $ssid")
+        nmcli dev wifi connect "$ssid" password "$password"
+    fi
+    ping google.com -c 3 2> /dev/null
+    connected=$?
+    if [ "$connected" != "0" ]; then
+        msgBox "ERROR" "No se ha detectado una conexión a Internet.\n\nConecte el equipo por cable o pulse ENTER para contectarse a una WiFi." 10 50
+        yesno="0"
+        ping google.com -c 3 2> /dev/null
+        connected=$?
+    fi
+done
+
+reset
+pacman -Syu
 pacman -S xdg-user-dirs
 
-backtitle="Usuario"
+backtitle="Usuarios"
 
 yesno=$(yesnoBox "Crear usuario" "¿Desea crear un nuevo usuario?")
 if [ "$yesno" == "0" ]; then
@@ -46,19 +69,6 @@ if [ -n "$n" ]; then
         sed -i "${n}s/^#//g" /etc/sudoers
     fi
 fi
-
-
-backtitle="Conexión a Internet"
-
-yesno=$(yesnoBox "WiFi" "¿Desea conectarse a alguna red WiFi?")
-if [ "$yesno" == "0" ]; then
-    ssid=$(inputBox "Introduce el SSID de la red WiFi")
-    password=$(inputBox "Introduce la contraseña de la red WiFi")
-    nmcli dev wifi connect "$ssid" password "$password"
-fi
-
-reset
-pacman -Syu
 
 
 backtitle="Servidor gráfico X11"

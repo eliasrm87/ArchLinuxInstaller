@@ -70,6 +70,10 @@ if [ "$yesno" == "0" ]; then
     fi
 fi
 
-passwd
+backtitle="Seguridad"
 
-wget https://raw.githubusercontent.com/IgekoSC/ArchLinuxInstaller/master/firstStart.sh -O /ArchLinuxInstaller/firstStart.sh
+msgBox "Contraseña para root" "A continuación se le solicitará que introduzca la contraseña de super usuario". 10 50
+
+reset
+
+passwd

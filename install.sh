@@ -1,5 +1,10 @@
 #! /bin/bash
 
+ping google.com -c 3 2> /dev/null
+if [ "$?" != "0" ]; then
+    wifi-menu
+fi
+
 wget https://raw.githubusercontent.com/IgekoSC/ArchLinuxInstaller/master/utils.sh
 
 source $( cd "$( dirname "$0" )" && pwd )/utils.sh
@@ -88,13 +93,6 @@ if [ "$yesno" == "0" ]; then
     fi
 fi
 
-backtitle="Conección a Internet"
-
-yesno=$(yesnoBox "WiFi" "¿Desea conectarse a alguna red WiFi?")
-if [ "$yesno" == "0" ]; then
-    wifi-menu
-fi
-
 backtitle="Instalación del sistema base"
 
 packages="base base-devel networkmanager os-prober dialog wget vim"
@@ -111,11 +109,13 @@ if [ "$yesno" == "0" ]; then
     genfstab -U -p /mnt >> /mnt/etc/fstab
 fi
 
-mkdir /mnt/ArchLinuxInstaller
-wget https://raw.githubusercontent.com/IgekoSC/ArchLinuxInstaller/master/chroot.sh -O /mnt/ArchLinuxInstaller/chroot.sh
-chmod +x /mnt/ArchLinuxInstaller/chroot.sh
-cp ./utils.sh /mnt/ArchLinuxInstaller/
-arch-chroot /mnt "/ArchLinuxInstaller/chroot.sh" $uefi
+mkdir -p /mnt/opt/ArchLinuxInstaller
+cp ./utils.sh /mnt/opt/ArchLinuxInstaller/
+wget https://raw.githubusercontent.com/IgekoSC/ArchLinuxInstaller/master/chroot.sh -O /mnt/opt/ArchLinuxInstaller/chroot.sh
+chmod +x /mnt/opt/ArchLinuxInstaller/chroot.sh
+wget https://raw.githubusercontent.com/IgekoSC/ArchLinuxInstaller/master/firstStart.sh -O /mnt/opt/ArchLinuxInstaller/firstStart.sh
+chmod +x /mnt/opt/ArchLinuxInstaller/firstStart.sh
+arch-chroot /mnt "/opt/ArchLinuxInstaller/chroot.sh" $uefi
 reset
 yesno=$(yesnoBox "Instalación finalizada" "La instalación del sistema base ha finalizado. Si todo ha ido bien, tras reiniciar, debería poder iniciar el sistema recién instalado.\n\n¿Desea desmontar unidades y reiniciar?" 10 50)
 reset
