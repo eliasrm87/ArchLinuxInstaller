@@ -178,8 +178,14 @@ if [ "$yesno" == "0" ]; then
         lang=$(menuBoxN "Seleccione su idioma" "$(pacman -Ss kde-l10n | grep "/kde-l10n" | cut -d "-" -f3 | cut -d " " -f1)" 15 50)
         pacman -S plasma kde-l10n-$lang
         ;;
+    lxde)
+        pacman -S lxde
+        ;;
     xfce)
         pacman -S xfce4 xfce4-goodies network-manager-applet
+        ;;
+    lxqt)
+        pacman -S lxqt
         ;;
     cinnamon)
         pacman -S cinnamon
