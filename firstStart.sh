@@ -167,7 +167,7 @@ backtitle="Escritorio"
 yesno=$(yesnoBox "Escritorio" "¿Desea instalar un escritorio?")
 if [ "$yesno" == "0" ]; then
 
-    desktop=$(menuBoxN "Seleccione su escritorio favorito" "gnome kde xfce cinnamon openbox" 15 50)
+    desktop=$(menuBoxN "Seleccione su escritorio favorito" "gnome kde lxde xfce lxqt cinnamon openbox" 15 50)
     reset
     
     case "$desktop" in
