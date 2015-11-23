@@ -14,6 +14,8 @@ function mountFormatPartition {
     backtitle="Particiones - Puntos de motaje y formato ($uefi)"
 
     yesno=0
+    cryptPartition=1
+    partitionPath=""
     if [ "$1" != "/" ]; then
         if [ "$1" != "/boot" ] || [ "$uefi" == "legacy" ]; then
             yesno=$(yesnoBox "Montar $1" "Desea especificar un punto de montaje para $1?")
@@ -25,26 +27,51 @@ function mountFormatPartition {
             partition=$(menuBox "Seleccione la partición que desea montar en $1" "$(lsblk -l | grep part | awk '{print $1,$4}')" 15 50)
         done
         if [ -n "$partition" ]; then
-
+            partitionPath="/dev/$partition"
+            map="cryptroot${1/\//}"
             yesno=$(yesnoBox "Formatear" "¿Desea formatear $partition ($1)?")
             if [ "$yesno" == "0" ]; then
                 format=""
                 if [ "$uefi" == "uefi" ] && [ "$1" == "/boot" ]; then
                     format="fat -F32"
                 else
+                    if [ "$1" != "/boot" ]; then
+                        cryptPartition=$(yesnoBox "Cifrar" "¿Desea cifrar $partition ($1)?")
+                        if [ "$cryptPartition" == "0" ]; then
+                            if [ "$1" == "/" ]; then
+                                cryptsetup -y -v luksFormat "$partitionPath"
+                                cryptsetup open $partitionPath $map
+                            else
+                                dd bs=512 count=4 if=/dev/urandom of=$map.keyfile iflag=fullblock
+                                cryptsetup -y -v luksFormat "$partitionPath" "$map.keyfile"
+                                cryptsetup --key-file "$map.keyfile" open $partitionPath $map
+                            fi
+                            partitionPath="/dev/mapper/$map"
+                        fi
+                    fi
                     format=$(menuBoxN "Seleccione el sistema de archivos para formatear $partition" "$(ls /bin/mkfs.* | cut -d "." -f2)" 15 50)
                 fi
                 if [ -n "$format" ]; then
                     yesno=$(yesnoBox "¡ATENCIÓN!" "¿Está seguro de que desea formatear $partition ($1) en $format?\n¡SE PERDERÁN TODOS LOS DATOS!")
                     if [ "$yesno" == "0" ]; then
                         reset
-                        mkfs.$format /dev/$partition
+                        mkfs.$format $partitionPath
                     fi
+                fi
+            else
+                if [ "$(blkid $partitionPath | grep -c "crypto_LUKS")" != "0" ]; then
+                    reset
+                    if [ "$1" == "/" ]; then
+                        cryptsetup open $partitionPath $map
+                    else
+                        cryptsetup --key-file "/mnt/etc/keyfiles/$map.keyfile" open $partitionPath $map
+                    fi
+                    partitionPath="/dev/mapper/$map"
                 fi
             fi
             
             mkdir -p /mnt$1
-            mount /dev/$partition /mnt$1
+            mount $partitionPath /mnt$1
         fi
     fi
 }
@@ -107,6 +134,33 @@ reset
 if [ "$yesno" == "0" ]; then
     pacstrap /mnt $packages
     genfstab -U -p /mnt >> /mnt/etc/fstab
+    #Check if there are encrypted partitions
+    cryptedroot=$(mount | grep -c "cryptroot")
+    if [ "$cryptedroot" != "0" ]; then
+        #Add "encrypt" hook if root partition is encrypted
+        n=$(cat /mnt/etc/mkinitcpio.conf | grep -n "^HOOKS=" | cut -d ":" -f1)
+        sed -i "${n}s/filesystems/encrypt filesystems/g" /mnt/etc/mkinitcpio.conf
+        #Add grub parameters for root partition and add extra entries to crypttab
+        partition=""
+        map=""
+        for line in $(lsblk -l | grep -B 1 "cryptroot" | awk '{print $1}'); do
+            if [ -z "$partition" ]; then
+                partition=$line
+            else
+                map=$line
+                if [ "$map" == "cryptroot" ]; then
+                    uuid=$(lsblk -lf | grep $partition | awk '{print $3}')
+                    sed -i "s/^GRUB_CMDLINE_LINUX=\"/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID=$uuid:cryptroot root=\/dev\/mapper\/cryptroot/g" /mnt/etc/default/grub
+                else
+                    mkdir -p /mnt/etc/keyfiles
+                    cp $map.keyfile /mnt/etc/keyfiles/$map.keyfile
+                    chmod 0400 /mnt/etc/keyfiles/$map.keyfile
+                    echo "$map    /dev/$partition      /etc/keyfiles/$map.keyfile luks" >> /mnt/etc/crypttab
+                fi
+                partition=""
+            fi
+        done
+    fi
 fi
 
 mkdir -p /mnt/opt/ArchLinuxInstaller
@@ -121,5 +175,9 @@ yesno=$(yesnoBox "Instalación finalizada" "La instalación del sistema base ha 
 reset
 if [ "$yesno" == "0" ]; then
     umount -R /mnt
+    #Close all encrypted partitions
+    for partition in $(lsblk -l | grep crypt | awk '{print $1}'); do
+        cryptsetup close $partition
+    done
     reboot
 fi
