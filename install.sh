@@ -167,8 +167,8 @@ mkdir -p /mnt/opt/ArchLinuxInstaller
 cp ./utils.sh /mnt/opt/ArchLinuxInstaller/
 wget https://raw.githubusercontent.com/IgekoSC/ArchLinuxInstaller/master/chroot.sh -O /mnt/opt/ArchLinuxInstaller/chroot.sh
 chmod +x /mnt/opt/ArchLinuxInstaller/chroot.sh
-wget https://raw.githubusercontent.com/IgekoSC/ArchLinuxInstaller/master/firstStart.sh -O /mnt/opt/ArchLinuxInstaller/firstStart.sh
-chmod +x /mnt/opt/ArchLinuxInstaller/firstStart.sh
+wget https://raw.githubusercontent.com/IgekoSC/ArchLinuxInstaller/master/postInstall.sh -O /mnt/opt/ArchLinuxInstaller/postInstall.sh
+chmod +x /mnt/opt/ArchLinuxInstaller/postInstall.sh
 arch-chroot /mnt "/opt/ArchLinuxInstaller/chroot.sh" $uefi
 reset
 yesno=$(yesnoBox "Instalación finalizada" "La instalación del sistema base ha finalizado. Si todo ha ido bien, tras reiniciar, debería poder iniciar el sistema recién instalado.\n\n¿Desea desmontar unidades y reiniciar?" 10 50)
