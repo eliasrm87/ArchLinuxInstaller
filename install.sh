@@ -163,14 +163,83 @@ if [ "$yesno" == "0" ]; then
     fi
 fi
 
+backtitle="Configuración del sistema base - Configuración del teclado"
+
+keymap=$(menuBoxN "Seleccione su esquema de teclado:" "$(ls /mnt/usr/share/kbd/keymaps/i386/qwerty | cut -d "." -f1)" 20 50)
+if [ -n "$keymap" ]; then
+    echo "KEYMAP=$keymap" > /mnt/etc/vconsole.conf
+fi
+
+backtitle="Configuración del sistema base - Hostname"
+
+hostname=$(inputBox "Introduce un nombre para este equipo (hostname)")
+
+echo $hostname > /mnt/etc/hostname
+
+backtitle="Configuración del sistema base - Zona horaria"
+
+zone=""
+continent=""
+while [ -z "$zone" ]; do
+    continent=$(menuBoxN "Seleccione su el continente de su zona horaria" "$(ls -l /mnt/usr/share/zoneinfo/ | grep -e "^d.*" | awk '{print $9}')" 15 50)
+    zone=$(menuBoxN "Seleccione su su zona horaria" "$(ls -l /mnt/usr/share/zoneinfo/$continent | grep -e "^-.*" | awk '{print $9}')" 15 50)
+done
+ln -s /mnt/usr/share/zoneinfo/$continent/$zone /mnt/etc/localtime
+
+backtitle="Configuración del sistema base - Localización"
+
+yesno="0"
+if [ -f /mnt/etc/locale.conf ]; then
+    yesno=$(yesnoBox "Localización" "¿Desea cambiar la localización?")
+fi
+if [ "$yesno" == "0" ]; then
+    locale=""
+    while [ -z "$locale" ]; do
+        locale=$(menuBox "Seleccione su localización" "$(cat /mnt/etc/locale.gen | grep -e "^#[a-z]\{2,3\}_[A-Z]\{2\}.*" | tr -d "#" | awk '{print $1,$2}')" 15 50)
+    done
+
+    echo "LANG=$locale" > /mnt/etc/locale.conf
+    sed -i "s/^#$locale/$locale/g" /mnt/etc/locale.gen
+    arch-chroot /mnt locale-gen
+fi
+
+backtitle="Cargador de arranque - GRUB ($uefi)"
+
+yesno=$(yesnoBox "Localización" "¿Desea instalar cargador de arranque GRUB?")
+if [ "$yesno" == "0" ]; then
+    if [ "$uefi" == "uefi" ]; then
+        reset
+        arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=arch_grub --recheck
+        arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
+        arch-chroot /mnt mkinitcpio -p linux
+        #UEFI firmware workaround - https://wiki.archlinux.org/index.php/GRUB#UEFI_firmware_workaround
+        mkdir /mnt/boot/EFI/boot
+        cp /mnt/boot/EFI/arch_grub/grubx64.efi /mnt/boot/EFI/boot/bootx64.efi
+    else
+        device=$(menuBox "Seleccione el disco en el que desea instalar el cargador de arranque GRUB:" "$(lsblk -l | grep disk | awk '{print $1,$4}')" 10 50)
+        if [ -n "$device" ]; then
+            reset
+            arch-chroot /mnt grub-install /dev/$device
+            arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
+            arch-chroot /mnt mkinitcpio -p linux
+        fi
+    fi
+fi
+
+backtitle="Seguridad"
+
+msgBox "Contraseña para root" "A continuación se le solicitará que introduzca la contraseña de super usuario". 10 50
+
+reset
+
+arch-chroot /mnt passwd
+
 mkdir -p /mnt/opt/ArchLinuxInstaller
 cp ./utils.sh /mnt/opt/ArchLinuxInstaller/
-wget https://raw.githubusercontent.com/IgekoSC/ArchLinuxInstaller/master/chroot.sh -O /mnt/opt/ArchLinuxInstaller/chroot.sh
-chmod +x /mnt/opt/ArchLinuxInstaller/chroot.sh
 wget https://raw.githubusercontent.com/IgekoSC/ArchLinuxInstaller/master/postInstall.sh -O /mnt/opt/ArchLinuxInstaller/postInstall.sh
 chmod +x /mnt/opt/ArchLinuxInstaller/postInstall.sh
-arch-chroot /mnt "/opt/ArchLinuxInstaller/chroot.sh" $uefi
 reset
+
 yesno=$(yesnoBox "Instalación finalizada" "La instalación del sistema base ha finalizado. Si todo ha ido bien, tras reiniciar, debería poder iniciar el sistema recién instalado.\n\n¿Desea desmontar unidades y reiniciar?" 10 50)
 reset
 if [ "$yesno" == "0" ]; then
