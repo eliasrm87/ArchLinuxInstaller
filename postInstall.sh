@@ -78,24 +78,25 @@ if [ "$yesno" == "0" ]; then
     reset
     pacman -S xorg-server xorg-xinit xorg-utils xorg-server-utils mesa mesa-demos
     
-    videoCard=$(menuBoxN "Seleccione el fabricante de su tarjeta gráfica" "nvidia nvidia_legacy nvidia_nouveau ati intel vesa virtualbox" 15 50)
+    videoCard=$(menuBoxN "Seleccione el fabricante de su tarjeta gráfica" "intel nvidia nvidia_nouveau optimus_bumblebee ati vesa virtualbox nvidia-340xx_legacy nvidia-304xx_legacy optimus_bumblebee_340xx_legacy optimus_bumblebee_304xx_legacy Ninguno" 15 50)
     reset
     
     case "$videoCard" in
+    intel)
+        pacman -S xf86-video-intel
+        ;;
     nvidia)
         pacman -S nvidia nvidia-utils
-        ;;
-    nvidia-304xx)
-        pacman -S nvidia-304xx
         ;;
     nvidia_nouveau)
         pacman -S xf86-video-nouveau
         ;;
+    optimus_bumblebee)
+        pacman -S nvidia nvidia-utils bumblebee primus xf86-video-intel mesa
+        systemctl enable bumblebeed.service
+        ;;
     ati)
         pacman -S xf86-video-ati
-        ;;
-    intel)
-        pacman -S xf86-video-intel
         ;;
     vesa)
         pacman -S xf86-video-vesa
@@ -104,6 +105,20 @@ if [ "$yesno" == "0" ]; then
         pacman -S virtualbox-guest-utils
         systemctl start vboxservice
         systemctl enable vboxservice
+        ;;
+    nvidia-340xx_legacy)
+        pacman -S nvidia-340xx nvidia-340xx-utils
+        ;;
+    nvidia-304xx_legacy)
+        pacman -S nvidia-304xx nvidia-304xx-utils
+        ;;
+    optimus_bumblebee_340xx_legacy)
+        pacman -S nvidia-340xx nvidia-340xx-utils bumblebee primus xf86-video-intel mesa
+        systemctl enable bumblebeed.service
+        ;;
+    optimus_bumblebee_304xx_legacy)
+        pacman -S nvidia-304xx nvidia-304xx-utils bumblebee primus xf86-video-intel mesa
+        systemctl enable bumblebeed.service
         ;;
     *)
         ;;
