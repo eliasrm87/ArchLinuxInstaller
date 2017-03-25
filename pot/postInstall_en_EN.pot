@@ -1,0 +1,107 @@
+#: postInstall.sh:11
+msgid "¿Desea activar repositorio %s?"
+msgstr "Do you want to enable %s repository?"
+#: postInstall.sh:23
+msgid "Script de instalación de ArchLinux %s"
+msgstr "ArchLinux instalation script %s"
+#: postInstall.sh:25
+msgid "Bienvenido de nuevo"
+msgstr "Welcome again"
+#: postInstall.sh:25
+msgid "La instalación del sistema base ha finalizado. A continuación se procederá a configurar el sistema e instalar algunos paquetes."
+msgstr "Base system installation is finised. Now you can proceed to configure and install some other packages."
+#: postInstall.sh:31
+msgid "Conexión a Internet"
+msgstr "Internet connection"
+#: postInstall.sh:34
+msgid "¿Desea conectarse a alguna red WiFi?"
+msgstr "Do you want to connect to any WiFi network?"
+#: postInstall.sh:37
+msgid "Seleccione la red WiFi a la que desea conectarse"
+msgstr "Select the WiFi network you want to connect to"
+#: postInstall.sh:38
+msgid "Introduce la contraseña de para %s"
+msgstr "Type password for %s"
+#: postInstall.sh:44
+msgid "ERROR"
+msgstr "ERROR"
+#: postInstall.sh:44
+msgid "No se ha detectado una conexión a Internet.\\n\\nConecte el equipo por cable o pulse ENTER para contectarse a una WiFi."
+msgstr "No internet connection found.\\n\\nPlug in a network cable or press ENTER for trying again to connect to a WiFi network."
+#: postInstall.sh:55
+msgid "Usuarios"
+msgstr "Users"
+#: postInstall.sh:57
+msgid "Crear usuario"
+msgstr "New user"
+#: postInstall.sh:57
+msgid "¿Desea crear un nuevo usuario?"
+msgstr "Do you want to create a new user?"
+#: postInstall.sh:59
+msgid "Introduce tu nombre de usuario"
+msgstr "Type name for the new user"
+#: postInstall.sh:69
+msgid "Habilitar sudo"
+msgstr "Enable sudo"
+#: postInstall.sh:69
+msgid "¿Desea activar el grupo wheel en sudoers?"
+msgstr "Do you want to enable wheel group on sudoers?"
+#: postInstall.sh:76
+msgid "Servidor gráfico X11"
+msgstr "X11 graphical server"
+#: postInstall.sh:78
+msgid "¿Desea instalar servidor gráfico X11?"
+msgstr "Do you want to install X11 graphical server?"
+#: postInstall.sh:83
+msgid "Seleccione el fabricante de su tarjeta gráfica"
+msgstr "Select your graphics card manufacturer"
+#: postInstall.sh:83
+msgid "Ninguno"
+msgstr "None"
+#: postInstall.sh:132
+msgid "Teclado X11"
+msgstr "X11 keyboard"
+#: postInstall.sh:135
+msgid "Teclado"
+msgstr "Keyboard"
+#: postInstall.sh:135
+msgid "¿Desea establecer distribución de teclado para X11 como 'es'?"
+msgstr "Do you want to set keyboard distribution for X11 to 'es'?"
+#: postInstall.sh:142
+msgid "Repositorios"
+msgstr "Repositories"
+#: postInstall.sh:148
+msgid "¿Desea activar repositorio archlinuxfr?"
+msgstr "Do you want to enable archlinuxfr repository?"
+#: postInstall.sh:155
+msgid "¿Desea instalar yaourt?"
+msgstr "Do you want to install yaourt?"
+#: postInstall.sh:165
+msgid "Audio"
+msgstr "Sound"
+#: postInstall.sh:167
+msgid "¿Desea instalar Pulseaudio?"
+msgstr "Do you want to install Pulseaudio?"
+#: postInstall.sh:174
+#: postInstall.sh:176
+msgid "Fuentes"
+msgstr "Fonts"
+#: postInstall.sh:176
+msgid "¿Desea instalar fuentes recomendadas?"
+msgstr "Do you want tu install recomended fonts?"
+#: postInstall.sh:182
+#: postInstall.sh:184
+msgid "Escritorio"
+msgstr "Desktop"
+#: postInstall.sh:184
+msgid "¿Desea instalar un escritorio?"
+msgstr "Do you want to install a desktop enviroment?"
+#: postInstall.sh:187
+msgid "Seleccione su escritorio favorito"
+msgstr "Select your favorite desktop"
+#: postInstall.sh:195
+msgid "Seleccione su idioma"
+msgstr "Select your language"
+#: postInstall.sh:218
+msgid "Seleccione su gestor de inicio de sesión favorito"
+msgstr "Select your favorite session manager"
