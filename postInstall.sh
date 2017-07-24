@@ -77,7 +77,7 @@ backtitle=$"Servidor gráfico X11"
 yesno=$(yesnoBox 0 0 "X11" $"¿Desea instalar servidor gráfico X11?")
 if [ "$yesno" == "0" ]; then
     reset
-    pacman -S xorg-server xorg-xinit xorg-utils xorg-server-utils mesa mesa-demos
+    pacman -S xorg-server xorg-xinit mesa mesa-demos
 
     videoCard=$(menuBoxN 15 50 $"Seleccione el fabricante de su tarjeta gráfica" "$(printf "intel nvidia nvidia_nouveau optimus_bumblebee ati vesa virtualbox nvidia-340xx_legacy nvidia-304xx_legacy optimus_bumblebee_340xx_legacy optimus_bumblebee_304xx_legacy %s" $"Ninguno")")
     reset
