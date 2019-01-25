@@ -191,8 +191,7 @@ if [ "$yesno" == "0" ]; then
         pacman -S gnome gnome-extra gnome-tweak-tool
         ;;
     kde)
-        lang=$(menuBoxN 15 50 $"Seleccione su idioma" "$(pacman -Ss kde-l10n | grep "/kde-l10n" | cut -d "-" -f3 | cut -d " " -f1)")
-        pacman -S plasma kde-l10n-$lang
+        pacman -S plasma
         ;;
     lxde)
         pacman -S lxde
