@@ -242,7 +242,7 @@ reset
 arch-chroot /mnt passwd
 
 wget https://github.com/erm2587/ArchLinuxInstaller/archive/master.tar.gz -O /mnt/opt/ArchLinuxInstaller.tar.gz
-tar -xzvf /mnt/opt/ArchLinuxInstaller.tar.gz -C /opt
+tar -xzvf /mnt/opt/ArchLinuxInstaller.tar.gz -C /mnt/opt
 rm /mnt/opt/ArchLinuxInstaller.tar.gz
 mv /mnt/opt/ArchLinuxInstaller-master /mnt/opt/ArchLinuxInstaller
 reset
