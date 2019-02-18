@@ -1,5 +1,7 @@
 #! /bin/bash
 
+set -e
+
 TEXTDOMAIN=install
 
 ping google.com -c 3 2> /dev/null
@@ -130,7 +132,7 @@ if [ "$uefi" == "uefi" ]; then
     packages="$packages efibootmgr"
 fi
 
-extraPkgs=$(checklistBoxN 0 0 $"Seleccione los paquetes de desea instalar:" "base-devel on networkmanager on os-prober on curl off wget off vim off")
+extraPkgs=$(checklistBoxN 0 0 $"Seleccione los paquetes de desea instalar:" "base-devel on networkmanager on os-prober on openssh off curl off wget off vim off")
 userPkgs=$(inputBox 0 0 $"Indique otros paquetes que desee instalar (opcional):")
 packages="$packages $extraPkgs $userPkgs"
 
@@ -140,8 +142,7 @@ if [ "$yesno" == "0" ]; then
     pacstrap /mnt $packages
     genfstab -U -p /mnt >> /mnt/etc/fstab
     #Check if there are encrypted partitions
-    cryptedroot=$(mount | grep -c "cryptroot")
-    if [ "$cryptedroot" != "0" ]; then
+    if mount | grep -q "cryptroot"; then
         #Add "encrypt" hook if root partition is encrypted
         n=$(cat /mnt/etc/mkinitcpio.conf | grep -n "^HOOKS=" | cut -d ":" -f1)
         sed -i "${n}s/filesystems/encrypt filesystems/g" /mnt/etc/mkinitcpio.conf
@@ -189,6 +190,7 @@ while [ -z "$zone" ]; do
     continent=$(menuBoxN 15 50 $"Seleccione el continente de su zona horaria" "$(ls -l /mnt/usr/share/zoneinfo/ | grep -e "^d.*" | awk '{print $9}')")
     zone=$(menuBoxN 15 50 $"Seleccione su su zona horaria" "$(ls -l /mnt/usr/share/zoneinfo/$continent | grep -e "^-.*" | awk '{print $9}')")
 done
+rm /mnt/etc/localtime | true
 ln -s /mnt/usr/share/zoneinfo/$continent/$zone /mnt/etc/localtime
 
 backtitle=$"Configuración del sistema base - Localización"
