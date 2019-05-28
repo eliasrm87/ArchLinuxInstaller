@@ -4,7 +4,7 @@ set -e
 
 TEXTDOMAIN=install
 
-ping google.com -c 3 2> /dev/null
+ping archlinux.org -c 3 2> /dev/null
 if [ "$?" != "0" ]; then
     wifi-menu
 fi

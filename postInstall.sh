@@ -37,12 +37,12 @@ while [ "$connected" != "0" ]; do
         password=$(inputBox 0 0 "$("Introduce la contraseña de para %s" "$ssid")")
         nmcli dev wifi connect "$ssid" password "$password"
     fi
-    ping google.com -c 3 2> /dev/null
+    ping archlinux.org -c 3 2> /dev/null
     connected=$?
     if [ "$connected" != "0" ]; then
         msgBox 10 50 $"ERROR" $"No se ha detectado una conexión a Internet.\n\nConecte el equipo por cable o pulse ENTER para contectarse a una WiFi."
         yesno="0"
-        ping google.com -c 3 2> /dev/null
+        ping archlinux.org -c 3 2> /dev/null
         connected=$?
     fi
 done
