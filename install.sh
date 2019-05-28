@@ -15,32 +15,32 @@ source $( cd "$( dirname "$0" )" && pwd )/utils.sh
 
 
 function mountFormatPartition {
-    backtitle="$(printf $"Particiones - Puntos de motaje y formato (%s)" "$uefi")"
+    backtitle="$(printf $"Partitions - Mount points and format (%s)" "$uefi")"
 
     yesno=0
     cryptPartition=1
     partitionPath=""
     if [ "$1" != "/" ]; then
         if [ "$1" != "/boot" ] || [ "$uefi" == "legacy" ]; then
-            yesno=$(yesnoBox 0 0 "$(printf $"Montar %s" "$1")" "$(printf $"¿Desea especificar un punto de montaje para %s?" "$1")")
+            yesno=$(yesnoBox 0 0 "$(printf $"Mount %s" "$1")" "$(printf $"Do you want to specify a mount point for %s?" "$1")")
         fi
     fi
     if [ "$yesno" == "0" ]; then
         partition=""
         while [ -z $partition ]; do
-            partition=$(menuBox 15 50 "$(printf $"Seleccione la partición que desea montar en %s" "$1")" $(lsblk -l | grep part | awk '{print $1,$4}'))
+            partition=$(menuBox 15 50 "$(printf $"Select the partition you want to be mounted as %s" "$1")" $(lsblk -l | grep part | awk '{print $1,$4}'))
         done
         if [ -n "$partition" ]; then
             partitionPath="/dev/$partition"
             map="cryptroot${1/\//}"
-            yesno=$(yesnoBox 0 0 $"Formatear" "$(printf $"¿Desea formatear %s (%s)?" "$partition" "$1")")
+            yesno=$(yesnoBox 0 0 $"Format" "$(printf $"Do you want to format %s (%s)?" "$partition" "$1")")
             if [ "$yesno" == "0" ]; then
                 format=""
                 if [ "$uefi" == "uefi" ] && [ "$1" == "/boot" ]; then
                     format="fat -F32"
                 else
                     if [ "$1" != "/boot" ]; then
-                        cryptPartition=$(yesnoBox 0 0 $"Cifrar" "$(printf $"¿Desea cifrar %s (%s)?" "$partition" "$1")")
+                        cryptPartition=$(yesnoBox 0 0 $"Encrypt" "$(printf $"Do you want to encrypt %s (%s)?" "$partition" "$1")")
                         if [ "$cryptPartition" == "0" ]; then
                             if [ "$1" == "/" ]; then
                                 cryptsetup -y -v luksFormat "$partitionPath"
@@ -53,10 +53,10 @@ function mountFormatPartition {
                             partitionPath="/dev/mapper/$map"
                         fi
                     fi
-                    format=$(menuBoxN 15 50 "$(printf $"Seleccione el sistema de archivos para formatear %s" "$partition")" "$(ls /bin/mkfs.* | cut -d "." -f2)")
+                    format=$(menuBoxN 15 50 "$(printf $"Select the file system you want for %s" "$partition")" "$(ls /bin/mkfs.* | cut -d "." -f2)")
                 fi
                 if [ -n "$format" ]; then
-                    yesno=$(yesnoBox 0 0 $"¡ATENCIÓN!" "$(printf $"¿Está seguro de que desea formatear %s (%s) en %s?\n¡SE PERDERÁN TODOS LOS DATOS!" "$partition" "$1" "$format")")
+                    yesno=$(yesnoBox 0 0 $"WARNING!" "$(printf $"Are you sure that you want to format %s (%s) as %s?\nALL DATA WILL BE LOST!" "$partition" "$1" "$format")")
                     if [ "$yesno" == "0" ]; then
                         reset
                         mkfs.$format $partitionPath
@@ -85,37 +85,37 @@ if [ -e /sys/firmware/efi ]; then
     uefi="uefi"
 fi
 
-backtitle="$(printf $"Script de instalación de ArchLinux %s" "v$version")"
+backtitle="$(printf $"ArchLinux instalation script %s" "v$version")"
 
-msgBox 10 50 $"Bienvenido" $"Este script actúa como guia de apoyo durante el proceso de instalación de ArchLinux. En cualquier momento puede detenerlo presionando Ctrl+C."
+msgBox 10 50 $"Welcome" $"This script works as a guide during Arch Linux installation process. You will be able to cancel it at any time by just pressing Ctrl+C"
 
-backtitle=$"Particiones - Creación"
+backtitle=$"Partitions - Creation"
 
-continue=$(yesnoBox 0 0 $"Particiones" $"¿Desea modificar las particiones de algún disco?")
+continue=$(yesnoBox 0 0 $"Partitions" $"Do you want to edit partitions of any disk?")
 while [ "$continue" == "0" ]; do
-    device=$(menuBox 10 50 $"Seleccione el disco que desea particionar:" $(lsblk -l | grep disk | awk '{print $1,$4}'))
+    device=$(menuBox 10 50 $"Select the disk you want to partition:" $(lsblk -l | grep disk | awk '{print $1,$4}'))
     if [ -n "$device" ]; then
-        partitionProgram=$(menuBoxN 12 50 "$(printf $"Seleccione la herramienta que desa usar para particionar %s:" "$device")" "cfdisk parted cgdisk")
+        partitionProgram=$(menuBoxN 12 50 "$(printf $"Select the partition tool you want to use for partitioning %s:" "$device")" "cfdisk parted cgdisk")
         if [ -n "$partitionProgram" ]; then
             reset
             $partitionProgram /dev/$device
         fi
     fi
 
-    continue=$(yesnoBox 0 0 $"Particiones" $"¿Desea modificar las particiones de otro disco?")
+    continue=$(yesnoBox 0 0 $"Partitions" $"Do you want to edit partitions of any other disk?")
 done
 
 mountFormatPartition "/"
 mountFormatPartition "/boot"
 mountFormatPartition "/home"
 
-backtitle=$"Particiones - SWAP"
+backtitle=$"Partitions - SWAP"
 
-yesno=$(yesnoBox 0 0 $"SWAP" $"¿Desea usar una partición como SWAP?")
+yesno=$(yesnoBox 0 0 $"SWAP" $"Do you want to use a partition as SWAP?")
 if [ "$yesno" == "0" ]; then
-    partition=$(menuBox 15 50 $"Seleccione la partición que desea usar como SWAP:" $(lsblk -l | grep part | awk '{print $1,$4}'))
+    partition=$(menuBox 15 50 $"Select the partition you want to use as SWAP:" $(lsblk -l | grep part | awk '{print $1,$4}'))
     if [ -n "$partition" ]; then
-        yesno=$(yesnoBox 0 0 $"¡ATENCIÓN!" "$(printf $"¿Está seguro de que desea formatear y activar %s como SWAP?\n¡SE PERDERÁN TODOS LOS DATOS!" "$partition")")
+        yesno=$(yesnoBox 0 0 $"WARNING!" "$(printf $"Are you sure that you want to format %s as SWAP?\nALL DATA WILL BE LOST!" "$partition")")
         if [ "$yesno" == "0" ]; then
             reset
             mkswap /dev/$partition
@@ -124,7 +124,7 @@ if [ "$yesno" == "0" ]; then
     fi
 fi
 
-backtitle=$"Instalación del sistema base"
+backtitle=$"Base system installation"
 
 packages="base grub dialog"
 
@@ -132,11 +132,11 @@ if [ "$uefi" == "uefi" ]; then
     packages="$packages efibootmgr"
 fi
 
-extraPkgs=$(checklistBoxN 0 0 $"Seleccione los paquetes de desea instalar:" "base-devel on networkmanager on os-prober on openssh off curl off wget off vim off")
-userPkgs=$(inputBox 0 0 $"Indique otros paquetes que desee instalar (opcional):")
+extraPkgs=$(checklistBoxN 0 0 $"Select packages you want to install:" "base-devel on networkmanager on os-prober on openssh off curl off wget off vim off")
+userPkgs=$(inputBox 0 0 $"Specify any other packages you want to install (optional):")
 packages="$packages $extraPkgs $userPkgs"
 
-yesno=$(yesnoBox 15 50 $"Resumen" "$(printf $"Se van a instalar los siguientes paquetes:\n\n%s\n\n¿Desea continuar?" "$packages")")
+yesno=$(yesnoBox 15 50 $"Summary" "$(printf $"The following packages will be installed:\n\n%s\n\nDo you want to continue?" "$packages")")
 reset
 if [ "$yesno" == "0" ]; then
     pacstrap /mnt $packages
@@ -169,40 +169,40 @@ if [ "$yesno" == "0" ]; then
     fi
 fi
 
-backtitle=$"Configuración del sistema base - Teclado"
+backtitle=$"Base system configuration - Keyboard"
 
-keymap=$(menuBoxN 20 50 $"Seleccione su esquema de teclado:" "$(ls /mnt/usr/share/kbd/keymaps/i386/qwerty | cut -d "." -f1)")
+keymap=$(menuBoxN 20 50 $"Select your keyboard distribution:" "$(ls /mnt/usr/share/kbd/keymaps/i386/qwerty | cut -d "." -f1)")
 if [ -n "$keymap" ]; then
     echo "KEYMAP=$keymap" > /mnt/etc/vconsole.conf
 fi
 
-backtitle=$"Configuración del sistema base - Hostname"
+backtitle=$"Base system configuration - Hostname"
 
-hostname=$(inputBox 0 0 $"Introduce un nombre para este equipo (hostname)")
+hostname=$(inputBox 0 0 $"Type your host name")
 
 echo $hostname > /mnt/etc/hostname
 
-backtitle=$"Configuración del sistema base - Zona horaria"
+backtitle=$"Base system configuration - Time zone"
 
 zone=""
 continent=""
 while [ -z "$zone" ]; do
-    continent=$(menuBoxN 15 50 $"Seleccione el continente de su zona horaria" "$(ls -l /mnt/usr/share/zoneinfo/ | grep -e "^d.*" | awk '{print $9}')")
-    zone=$(menuBoxN 15 50 $"Seleccione su su zona horaria" "$(ls -l /mnt/usr/share/zoneinfo/$continent | grep -e "^-.*" | awk '{print $9}')")
+    continent=$(menuBoxN 15 50 $"Select your time zone continent" "$(ls -l /mnt/usr/share/zoneinfo/ | grep -e "^d.*" | awk '{print $9}')")
+    zone=$(menuBoxN 15 50 $"Select your time zone" "$(ls -l /mnt/usr/share/zoneinfo/$continent | grep -e "^-.*" | awk '{print $9}')")
 done
 rm /mnt/etc/localtime | true
 ln -s /mnt/usr/share/zoneinfo/$continent/$zone /mnt/etc/localtime
 
-backtitle=$"Configuración del sistema base - Localización"
+backtitle=$"Base system configuration - Localization"
 
 yesno="0"
 if [ -f /mnt/etc/locale.conf ]; then
-    yesno=$(yesnoBox 0 0 $"Localización" $"¿Desea cambiar la localización?")
+    yesno=$(yesnoBox 0 0 $"Localization" $"Do you want to change the localization?")
 fi
 if [ "$yesno" == "0" ]; then
     locale=""
     while [ -z "$locale" ]; do
-        locale=$(menuBox 15 50 $"Seleccione su localización" $(cat /mnt/etc/locale.gen | grep -e "^#[a-z]\{2,3\}_[A-Z]\{2\}.*" | tr -d "#" | awk '{print $1,$2}'))
+        locale=$(menuBox 15 50 $"Select your localization" $(cat /mnt/etc/locale.gen | grep -e "^#[a-z]\{2,3\}_[A-Z]\{2\}.*" | tr -d "#" | awk '{print $1,$2}'))
     done
 
     echo "LANG=$locale" > /mnt/etc/locale.conf
@@ -210,9 +210,9 @@ if [ "$yesno" == "0" ]; then
     arch-chroot /mnt locale-gen
 fi
 
-backtitle="$(printf $"Cargador de arranque - GRUB (%s)" "$uefi")"
+backtitle="$(printf $"Boot loader - GRUB (%s)" "$uefi")"
 
-yesno=$(yesnoBox 0 0 $"Localización" $"¿Desea instalar cargador de arranque GRUB?")
+yesno=$(yesnoBox 0 0 $"Localization" $"Do you want to install GRUB boot loader?")
 if [ "$yesno" == "0" ]; then
     if [ "$uefi" == "uefi" ]; then
         reset
@@ -223,7 +223,7 @@ if [ "$yesno" == "0" ]; then
         mkdir /mnt/boot/EFI/boot
         cp /mnt/boot/EFI/arch_grub/grubx64.efi /mnt/boot/EFI/boot/bootx64.efi
     else
-        device=$(menuBox 10 50 $"Seleccione el disco en el que desea instalar el cargador de arranque GRUB:" $(lsblk -l | grep disk | awk '{print $1,$4}'))
+        device=$(menuBox 10 50 $"Select the disk where you want to install GRUB boot loader" $(lsblk -l | grep disk | awk '{print $1,$4}'))
         if [ -n "$device" ]; then
             reset
             arch-chroot /mnt grub-install /dev/$device
@@ -233,9 +233,9 @@ if [ "$yesno" == "0" ]; then
     fi
 fi
 
-backtitle=$"Seguridad"
+backtitle=$"Security"
 
-msgBox 10 50 $"Contraseña para root" $"A continuación se le solicitará que introduzca la contraseña de super usuario."
+msgBox 10 50 $"Root password" $"You will be asked for root password."
 
 reset
 
@@ -247,7 +247,7 @@ rm /mnt/opt/ArchLinuxInstaller.tar.gz
 mv /mnt/opt/ArchLinuxInstaller-master /mnt/opt/ArchLinuxInstaller
 reset
 
-yesno=$(yesnoBox 10 50 $"Instalación finalizada" $"La instalación del sistema base ha finalizado. Si todo ha ido bien, tras reiniciar, debería poder iniciar el sistema recién instalado.\n\n¿Desea desmontar unidades y reiniciar?")
+yesno=$(yesnoBox 10 50 $"Installation finished" $"Base system installation is finised. If everthing went fine, after reboot, you will be able to start your brand new system.\n\nDo you want to unmount disks and reboot?")
 reset
 if [ "$yesno" == "0" ]; then
     umount -R /mnt

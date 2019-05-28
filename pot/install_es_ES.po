@@ -1,0 +1,242 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-28 22:13+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: install.sh\n"
+
+#: ../install.sh:18
+msgid "Partitions - Mount points and format (%s)"
+msgstr "Particiones - Puntos de motaje y formato (%s)"
+
+#: ../install.sh:25
+msgid "Mount %s"
+msgstr "Montar %s"
+
+#: ../install.sh:25
+msgid "Do you want to specify a mount point for %s?"
+msgstr "¿Desea especificar un punto de montaje para %s?"
+
+#: ../install.sh:31
+msgid "Select the partition you want to be mounted as %s"
+msgstr "Seleccione la partición que desea montar en %s"
+
+#: ../install.sh:36
+msgid "Format"
+msgstr "Formatear"
+
+#: ../install.sh:36
+msgid "Do you want to format %s (%s)?"
+msgstr "¿Desea formatear %s (%s)?"
+
+#: ../install.sh:43
+msgid "Encrypt"
+msgstr "Cifrar"
+
+#: ../install.sh:43
+msgid "Do you want to encrypt %s (%s)?"
+msgstr "¿Desea cifrar %s (%s)?"
+
+#: ../install.sh:56
+msgid "Select the file system you want for %s"
+msgstr "Seleccione el sistema de archivos para formatear %s"
+
+#: ../install.sh:59 ../install.sh:118
+msgid "WARNING!"
+msgstr "¡ATENCIÓN!"
+
+#: ../install.sh:59
+msgid ""
+"Are you sure that you want to format %s (%s) as %s?\\nALL DATA WILL BE LOST!"
+msgstr ""
+"¿Está seguro de que desea formatear %s (%s) en %s?\n"
+"¡SE PERDERÁN TODOS LOS DATOS!"
+
+#: ../install.sh:88
+msgid "ArchLinux instalation script %s"
+msgstr "Script de instalación de ArchLinux %s"
+
+#: ../install.sh:90
+msgid "Welcome"
+msgstr "Bienvenido"
+
+#: ../install.sh:90
+msgid ""
+"This script works as a guide during Arch Linux installation process. You "
+"will be able to cancel it at any time by just pressing Ctrl+C"
+msgstr ""
+"Este script actúa como guia de apoyo durante el proceso de instalación de "
+"ArchLinux. En cualquier momento puede detenerlo presionando Ctrl+C"
+
+#: ../install.sh:92
+msgid "Partitions - Creation"
+msgstr "Particiones - Creación"
+
+#: ../install.sh:94 ../install.sh:105
+msgid "Partitions"
+msgstr "Particiones"
+
+#: ../install.sh:94
+msgid "Do you want to edit partitions of any disk?"
+msgstr "¿Desea modificar las particiones de algún disco?"
+
+#: ../install.sh:96
+msgid "Select the disk you want to partition:"
+msgstr "Seleccione el disco que desea particionar:"
+
+#: ../install.sh:98
+msgid "Select the partition tool you want to use for partitioning %s:"
+msgstr "Seleccione la herramienta que desa usar para particionar %s:"
+
+#: ../install.sh:105
+msgid "Do you want to edit partitions of any other disk?"
+msgstr "¿Desea modificar las particiones de otro disco?"
+
+#: ../install.sh:112
+msgid "Partitions - SWAP"
+msgstr "Particiones - SWAP"
+
+#: ../install.sh:114
+msgid "SWAP"
+msgstr "SWAP"
+
+#: ../install.sh:114
+msgid "Do you want to use a partition as SWAP?"
+msgstr "¿Desea usar una partición como SWAP?"
+
+#: ../install.sh:116
+msgid "Select the partition you want to use as SWAP:"
+msgstr "Seleccione la partición que desea usar como SWAP:"
+
+#: ../install.sh:118
+msgid ""
+"Are you sure that you want to format %s as SWAP?\\nALL DATA WILL BE LOST!"
+msgstr ""
+"¿Está seguro de que desea formatear y activar %s como SWAP?\n"
+"¡SE PERDERÁN TODOS LOS DATOS!"
+
+#: ../install.sh:127
+msgid "Base system installation"
+msgstr "Configuración del sistema base - Localización"
+
+#: ../install.sh:135
+msgid "Select packages you want to install:"
+msgstr "Seleccione los paquetes de desea instalar:"
+
+#: ../install.sh:136
+msgid "Specify any other packages you want to install (optional):"
+msgstr "Indique otros paquetes que desee instalar (opcional):"
+
+#: ../install.sh:139
+msgid "Summary"
+msgstr "Resumen"
+
+#: ../install.sh:139
+msgid ""
+"The following packages will be installed:\\n\\n%s\\n\\nDo you want to "
+"continue?"
+msgstr ""
+"Se van a instalar los siguientes paquetes:\n"
+"\n"
+"%s\n"
+"\n"
+"¿Desea continuar?"
+
+#: ../install.sh:172
+msgid "Base system configuration - Keyboard"
+msgstr "Configuración del sistema base - Teclado"
+
+#: ../install.sh:174
+msgid "Select your keyboard distribution:"
+msgstr "Seleccione su esquema de teclado:"
+
+#: ../install.sh:179
+msgid "Base system configuration - Hostname"
+msgstr "Configuración del sistema base - Hostname"
+
+#: ../install.sh:181
+msgid "Type your host name"
+msgstr "Introduce un nombre para este equipo (hostname)"
+
+#: ../install.sh:185
+msgid "Base system configuration - Time zone"
+msgstr "Configuración del sistema base - Zona horaria"
+
+#: ../install.sh:190
+msgid "Select your time zone continent"
+msgstr "Seleccione el continente de su zona horaria"
+
+#: ../install.sh:191
+msgid "Select your time zone"
+msgstr "Seleccione su su zona horaria"
+
+#: ../install.sh:196
+msgid "Base system configuration - Localization"
+msgstr "Configuración del sistema base - Localización"
+
+#: ../install.sh:200 ../install.sh:215
+msgid "Localization"
+msgstr "Localización"
+
+#: ../install.sh:200
+msgid "Do you want to change the localization?"
+msgstr "¿Desea cambiar la localización?"
+
+#: ../install.sh:205
+msgid "Select your localization"
+msgstr "Seleccione su localización"
+
+#: ../install.sh:213
+msgid "Boot loader - GRUB (%s)"
+msgstr "Cargador de arranque - GRUB (%s)"
+
+#: ../install.sh:215
+msgid "Do you want to install GRUB boot loader?"
+msgstr "¿Desea instalar cargador de arranque GRUB?"
+
+#: ../install.sh:226
+msgid "Select the disk where you want to install GRUB boot loader"
+msgstr ""
+"Seleccione el disco en el que desea instalar el cargador de arranque GRUB"
+
+#: ../install.sh:236
+msgid "Security"
+msgstr "Seguridad"
+
+#: ../install.sh:238
+msgid "Root password"
+msgstr "Contraseña para root"
+
+#: ../install.sh:238
+msgid "You will be asked for root password."
+msgstr ""
+"A continuación se le solicitará que introduzca la contraseña de super "
+"usuario."
+
+#: ../install.sh:250
+msgid "Installation finished"
+msgstr "Instalación finalizada"
+
+#: ../install.sh:250
+msgid ""
+"Base system installation is finised. If everthing went fine, after reboot, "
+"you will be able to start your brand new system.\\n\\nDo you want to unmount "
+"disks and reboot?"
+msgstr ""
+"La instalación del sistema base ha finalizado. Si todo ha ido bien, tras "
+"reiniciar, debería poder iniciar el sistema recién instalado.\n"
+"\n"
+"¿Desea desmontar unidades y reiniciar?"
+
+#~ msgid "Installing base system"
+#~ msgstr "Instalación del sistema base"

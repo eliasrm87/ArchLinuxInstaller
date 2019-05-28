@@ -1,0 +1,163 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-28 22:20+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: postInstall.sh\n"
+
+#: ../postInstall.sh:10
+msgid "Do you want to enable %s repository?"
+msgstr "¿Desea activar repositorio %s?"
+
+#: ../postInstall.sh:22
+msgid "ArchLinux instalation script %s"
+msgstr "Script de instalación de ArchLinux %s"
+
+#: ../postInstall.sh:24
+msgid "Welcome back"
+msgstr "Bienvenido de nuevo"
+
+#: ../postInstall.sh:24
+msgid ""
+"Base system installation is finised. Now you can proceed to configure and "
+"install some other packages."
+msgstr ""
+"La instalación del sistema base ha finalizado. A continuación se procederá a "
+"configurar el sistema e instalar algunos paquetes."
+
+#: ../postInstall.sh:30
+msgid "Internet connection"
+msgstr "Conexión a Internet"
+
+#: ../postInstall.sh:33
+msgid "Do you want to connect to any WiFi network?"
+msgstr "¿Desea conectarse a alguna red WiFi?"
+
+#: ../postInstall.sh:36
+msgid "Select the WiFi network you want to connect to"
+msgstr "Seleccione la red WiFi a la que desea conectarse"
+
+#: ../postInstall.sh:43
+msgid "ERROR"
+msgstr "ERROR"
+
+#: ../postInstall.sh:43
+msgid ""
+"No internet connection found.\\n\\nPlug in a network cable or press ENTER "
+"for trying again to connect to a WiFi network."
+msgstr ""
+"No se ha detectado una conexión a Internet.\n"
+"\n"
+"Conecte el equipo por cable o pulse ENTER para contectarse a una WiFi."
+
+#: ../postInstall.sh:54
+msgid "Users"
+msgstr "Usuarios"
+
+#: ../postInstall.sh:56
+msgid "New user"
+msgstr "Crear usuario"
+
+#: ../postInstall.sh:56
+msgid "Do you want to create a new user?"
+msgstr "¿Desea crear un nuevo usuario?"
+
+#: ../postInstall.sh:58
+msgid "Type name for the new user"
+msgstr "Introduce tu nombre de usuario"
+
+#: ../postInstall.sh:68
+msgid "Enable sudo"
+msgstr "Habilitar sudo"
+
+#: ../postInstall.sh:68
+msgid "Do you want to enable wheel group on sudoers?"
+msgstr "¿Desea activar el grupo wheel en sudoers?"
+
+#: ../postInstall.sh:75
+msgid "X11 graphical server"
+msgstr "Servidor gráfico X11"
+
+#: ../postInstall.sh:77
+msgid "Do you want to install X11 graphical server?"
+msgstr "¿Desea instalar servidor gráfico X11?"
+
+#: ../postInstall.sh:82
+msgid "Select your graphics card manufacturer"
+msgstr "Seleccione el fabricante de su tarjeta gráfica"
+
+#: ../postInstall.sh:82
+msgid "None"
+msgstr "Ninguno"
+
+#: ../postInstall.sh:131
+msgid "X11 keyboard"
+msgstr "Teclado X11"
+
+#: ../postInstall.sh:134
+msgid "Keyboard"
+msgstr "Teclado"
+
+#: ../postInstall.sh:134
+msgid "Do you want to set keyboard distribution for X11 to 'es'?"
+msgstr "¿Desea establecer distribución de teclado para X11 como 'es'?"
+
+#: ../postInstall.sh:141
+msgid "Repositories"
+msgstr "Repositorios"
+
+#: ../postInstall.sh:147
+msgid "Do you want to enable archlinuxfr repository?"
+msgstr "¿Desea activar repositorio archlinuxfr?"
+
+#: ../postInstall.sh:154
+msgid "Do you want to install yaourt?"
+msgstr "¿Desea instalar yaourt?"
+
+#: ../postInstall.sh:164
+msgid "Sound"
+msgstr "Audio"
+
+#: ../postInstall.sh:166
+msgid "Do you want to install Pulseaudio?"
+msgstr "¿Desea instalar Pulseaudio?"
+
+#: ../postInstall.sh:173 ../postInstall.sh:175
+msgid "Fonts"
+msgstr "Fuentes"
+
+#: ../postInstall.sh:175
+msgid "Do you want tu install recomended fonts?"
+msgstr "¿Desea instalar fuentes recomendadas?"
+
+#: ../postInstall.sh:181 ../postInstall.sh:183
+msgid "Desktop"
+msgstr "Escritorio"
+
+#: ../postInstall.sh:183
+msgid "Do you want to install a desktop enviroment?"
+msgstr "¿Desea instalar un escritorio?"
+
+#: ../postInstall.sh:186
+msgid "Select your favorite desktop"
+msgstr "Seleccione su escritorio favorito"
+
+#: ../postInstall.sh:216
+msgid "Select your favorite session manager"
+msgstr "Seleccione su gestor de inicio de sesión favorito"
+
+#~ msgid "Type password for %s"
+#~ msgstr "Introduce la contraseña de para %s"
+
+#~ msgid "Select your language"
+#~ msgstr "Seleccione su idioma"
