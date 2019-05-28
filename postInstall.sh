@@ -1,5 +1,9 @@
 #! /bin/bash
 
+set -e
+
+. gettext.sh
+
 TEXTDOMAIN=postInstall
 
 source $( cd "$( dirname "$0" )" && pwd )/utils.sh
@@ -7,7 +11,7 @@ source $( cd "$( dirname "$0" )" && pwd )/utils.sh
 function enableRepo {
     n=$(grep -n -m1 "^#\[$1\]" /etc/pacman.conf | cut -d ":" -f1)
     if [ -n "$n" ]; then
-        yesno=$(yesnoBox 0 0 "$1" "$(printf $"Do you want to enable %s repository?" "$1")")
+        yesno=$(yesnoBox 0 0 "$1" "$(printf "$(eval_gettext "Do you want to enable %s repository?")" "$1")")
         if [ "$yesno" == "0" ]; then
             sed -i "${n}s/^#//g" /etc/pacman.conf
             ((n++))
@@ -19,28 +23,28 @@ function enableRepo {
 }
 
 
-backtitle="$(printf $"ArchLinux instalation script %s" "v$version")"
+backtitle="$(printf "$(eval_gettext "ArchLinux instalation script %s")" "v$version")"
 
-msgBox 10 50 $"Welcome back" $"Base system installation is finised. Now you can proceed to configure and install some other packages."
+msgBox 10 50 "$(eval_gettext "Welcome back")" "$(eval_gettext "Base system installation is finised. Now you can proceed to configure and install some other packages.")"
 
 reset
 systemctl start NetworkManager.service
 systemctl enable NetworkManager.service
 
-backtitle=$"Internet connection"
+backtitle="$(eval_gettext "Internet connection")"
 
 connected=-1
-yesno=$(yesnoBox 0 0 "WiFi" $"Do you want to connect to any WiFi network?")
+yesno=$(yesnoBox 0 0 "WiFi" "$(eval_gettext "Do you want to connect to any WiFi network?")")
 while [ "$connected" != "0" ]; do
     if [ "$yesno" == "0" ]; then
-        ssid=$(menuBoxN 15 50 $"Select the WiFi network you want to connect to" "$(nmcli dev wifi list | grep -v "SSID" | tr "*" " " | awk '{print $1}')")
+        ssid=$(menuBoxN 15 50 "$(eval_gettext "Select the WiFi network you want to connect to")" "$(nmcli dev wifi list | grep -v "SSID" | tr "*" " " | awk '{print $1}')")
         password=$(inputBox 0 0 "$("Type password for %s" "$ssid")")
         nmcli dev wifi connect "$ssid" password "$password"
     fi
     ping archlinux.org -c 3 2> /dev/null
     connected=$?
     if [ "$connected" != "0" ]; then
-        msgBox 10 50 $"ERROR" $"No internet connection found.\n\nPlug in a network cable or press ENTER for trying again to connect to a WiFi network."
+        msgBox 10 50 "$(eval_gettext "ERROR")" "$(eval_gettext "No internet connection found.\n\nPlug in a network cable or press ENTER for trying again to connect to a WiFi network.")"
         yesno="0"
         ping archlinux.org -c 3 2> /dev/null
         connected=$?
@@ -51,11 +55,11 @@ reset
 pacman -Syu
 pacman -S xdg-user-dirs
 
-backtitle=$"Users"
+backtitle="$(eval_gettext "Users")"
 
-yesno=$(yesnoBox 0 0 $"New user" $"Do you want to create a new user?")
+yesno=$(yesnoBox 0 0 "$(eval_gettext "New user")" "$(eval_gettext "Do you want to create a new user?")")
 if [ "$yesno" == "0" ]; then
-    username=$(inputBox 0 0 $"Type name for the new user")
+    username=$(inputBox 0 0 "$(eval_gettext "Type name for the new user")")
     if [ -n "$username" ]; then
         useradd -m -g users -G audio,lp,optical,storage,video,wheel,games,power,scanner -s /bin/bash $username
         reset
@@ -65,21 +69,21 @@ fi
 
 n=$(grep -n -m1 "^# %wheel ALL=(ALL) ALL" /etc/sudoers | cut -d ":" -f1)
 if [ -n "$n" ]; then
-    yesno=$(yesnoBox 0 0 $"Enable sudo" $"Do you want to enable wheel group on sudoers?")
+    yesno=$(yesnoBox 0 0 "$(eval_gettext "Enable sudo")" "$(eval_gettext "Do you want to enable wheel group on sudoers?")")
     if [ "$yesno" == "0" ]; then
         sed -i "${n}s/^#//g" /etc/sudoers
     fi
 fi
 
 
-backtitle=$"X11 graphical server"
+backtitle="$(eval_gettext "X11 graphical server")"
 
-yesno=$(yesnoBox 0 0 "X11" $"Do you want to install X11 graphical server?")
+yesno=$(yesnoBox 0 0 "X11" "$(eval_gettext "Do you want to install X11 graphical server?")")
 if [ "$yesno" == "0" ]; then
     reset
     pacman -S xorg-server xorg-xinit mesa mesa-demos
 
-    videoCard=$(menuBoxN 15 50 $"Select your graphics card manufacturer" "$(printf "intel nvidia nvidia_nouveau optimus_bumblebee ati vesa virtualbox nvidia-340xx_legacy nvidia-304xx_legacy optimus_bumblebee_340xx_legacy optimus_bumblebee_304xx_legacy %s" $"None")")
+    videoCard=$(menuBoxN 15 50 "$(eval_gettext "Select your graphics card manufacturer")" "$(printf "intel nvidia nvidia_nouveau optimus_bumblebee ati vesa virtualbox nvidia-340xx_legacy nvidia-304xx_legacy optimus_bumblebee_340xx_legacy optimus_bumblebee_304xx_legacy %s" "$(eval_gettext "None")")")
     reset
 
     case "$videoCard" in
@@ -128,30 +132,30 @@ if [ "$yesno" == "0" ]; then
     pacman -S xorg-twm xorg-xclock xterm
 fi
 
-backtitle=$"X11 keyboard"
+backtitle="$(eval_gettext "X11 keyboard")"
 
 #Hay que mejorar esto para que soporte varios idiomas
-yesno=$(yesnoBox 0 0 $"Keyboard" $"Do you want to set keyboard distribution for X11 to 'es'?")
+yesno=$(yesnoBox 0 0 "$(eval_gettext "Keyboard")" "$(eval_gettext "Do you want to set keyboard distribution for X11 to 'es'?")")
 if [ "$yesno" == "0" ]; then
     reset
     wget https://raw.githubusercontent.com/erm2587/ArchLinuxInstaller/master/10-keyboard.conf -O /etc/X11/xorg.conf.d/10-keyboard.conf
 fi
 
 
-backtitle=$"Repositories"
+backtitle="$(eval_gettext "Repositories")"
 
 enableRepo "multilib"
 enableRepo "community"
 
 if [ $(cat /etc/pacman.conf | grep -c "^\[archlinuxfr\]") == "0" ]; then
-    yesno=$(yesnoBox 0 0 "archlinuxfr" $"Do you want to enable archlinuxfr repository?")
+    yesno=$(yesnoBox 0 0 "archlinuxfr" "$(eval_gettext "Do you want to enable archlinuxfr repository?")")
     if [ "$yesno" == "0" ]; then
         echo '[archlinuxfr]' >> /etc/pacman.conf
         echo 'SigLevel = Never' >> /etc/pacman.conf
         echo 'Server = http://repo.archlinux.fr/$arch' >> /etc/pacman.conf
         reset
         pacman -Sy
-        yesno=$(yesnoBox 0 0 "yaourt" $"Do you want to install yaourt?")
+        yesno=$(yesnoBox 0 0 "yaourt" "$(eval_gettext "Do you want to install yaourt?")")
         if [ "$yesno" == "0" ]; then
             reset
             pacman -S yaourt
@@ -161,29 +165,29 @@ if [ $(cat /etc/pacman.conf | grep -c "^\[archlinuxfr\]") == "0" ]; then
 fi
 
 
-backtitle=$"Sound"
+backtitle="$(eval_gettext "Sound")"
 
-yesno=$(yesnoBox 0 0 "Pulseaudio" $"Do you want to install Pulseaudio?")
+yesno=$(yesnoBox 0 0 "Pulseaudio" "$(eval_gettext "Do you want to install Pulseaudio?")")
 if [ "$yesno" == "0" ]; then
     reset
     pacman -S pulseaudio pulseaudio-alsa
 fi
 
 
-backtitle=$"Fonts"
+backtitle="$(eval_gettext "Fonts")"
 
-yesno=$(yesnoBox 0 0 $"Fonts" $"Do you want tu install recomended fonts?")
+yesno=$(yesnoBox 0 0 "$(eval_gettext "Fonts")" "$(eval_gettext "Do you want tu install recomended fonts?")")
 if [ "$yesno" == "0" ]; then
     reset
     pacman -S ttf-liberation ttf-bitstream-vera ttf-dejavu ttf-droid ttf-freefont artwiz-fonts
 fi
 
-backtitle=$"Desktop"
+backtitle="$(eval_gettext "Desktop")"
 
-yesno=$(yesnoBox 0 0 $"Desktop" $"Do you want to install a desktop enviroment?")
+yesno=$(yesnoBox 0 0 "$(eval_gettext "Desktop")" "$(eval_gettext "Do you want to install a desktop enviroment?")")
 if [ "$yesno" == "0" ]; then
 
-    desktop=$(menuBoxN 15 50 $"Select your favorite desktop" "gnome kde lxde xfce lxqt cinnamon openbox")
+    desktop=$(menuBoxN 15 50 "$(eval_gettext "Select your favorite desktop")" "gnome kde lxde xfce lxqt cinnamon openbox")
     reset
 
     case "$desktop" in
@@ -213,7 +217,7 @@ if [ "$yesno" == "0" ]; then
     esac
 
     reset
-    sessionManager=$(menuBoxN 15 50 $"Select your favorite session manager" "sddm gdm")
+    sessionManager=$(menuBoxN 15 50 "$(eval_gettext "Select your favorite session manager")" "sddm gdm")
     reset
 
     case "$sessionManager" in
