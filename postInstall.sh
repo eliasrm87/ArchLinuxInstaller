@@ -147,23 +147,34 @@ backtitle="$(eval_gettext "Repositories")"
 enableRepo "multilib"
 enableRepo "community"
 
-if [ $(cat /etc/pacman.conf | grep -c "^\[archlinuxfr\]") == "0" ]; then
-    yesno=$(yesnoBox 0 0 "archlinuxfr" "$(eval_gettext "Do you want to enable archlinuxfr repository?")")
-    if [ "$yesno" == "0" ]; then
-        echo '[archlinuxfr]' >> /etc/pacman.conf
-        echo 'SigLevel = Never' >> /etc/pacman.conf
-        echo 'Server = http://repo.archlinux.fr/$arch' >> /etc/pacman.conf
-        reset
-        pacman -Sy
-        yesno=$(yesnoBox 0 0 "yaourt" "$(eval_gettext "Do you want to install yaourt?")")
-        if [ "$yesno" == "0" ]; then
-            reset
-            pacman -S yaourt
-            yaourt -Syua
-        fi
-    fi
+yesno=$(yesnoBox 0 0 "$(eval_gettext "AUR helper")" "$(eval_gettext "Do you want to install an AUR helper?")")
+if [ "$yesno" == "0" ]; then
+    desktop=$(menuBoxN 15 50 "$(eval_gettext "Select your favorite AUR helper")" "yay aurman")
+    reset
+
+    case "$desktop" in
+    yay)
+        cd /tmp
+        git clone https://aur.archlinux.org/yay.git
+        cd yay
+        makepkg -si
+        ;;
+    aurman)
+        cd /tmp
+        gpg --recv-key 465022E743D71E39
+        git clone https://aur.archlinux.org/aurman.git
+        cd aurman
+        makepkg -si
+        ;;
+    *)
+        ;;
+    esac
 fi
 
+yesno=$(yesnoBox 0 0 "Pacman" "$(eval_gettext "Do you want to enable pacman colors?")")
+if [ "$yesno" == "0" ]; then
+    sed -i '/^#Color/s/^#//' /etc/pacman.conf
+fi
 
 backtitle="$(eval_gettext "Sound")"
 
