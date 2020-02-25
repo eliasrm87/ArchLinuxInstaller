@@ -9,7 +9,7 @@ function menuBox {
     if [ "$1" -gt "0" ]; then h=$1; fi
     if [ "$2" -gt "0" ]; then w=$2; fi
 
-    echo $(dialog --backtitle "$backtitle" --menu "$3" $h $w $((($#-1)/3)) "${@:4}" 3>&1 1>&2 2>&3 3>&-)
+    dialog --backtitle "$backtitle" --menu "$3" $h $w $((($#-1)/3)) "${@:4}" 3>&1 1>&2 2>&3 3>&-
 }
 
 function menuBoxN {
@@ -34,6 +34,16 @@ function menuBoxN {
     else
         echo ""
     fi
+}
+
+function menuBoxNn {
+    h=20
+    w=50
+
+    if [ "$1" -gt "0" ]; then h=$1; fi
+    if [ "$2" -gt "0" ]; then w=$2; fi
+
+    dialog --backtitle "$backtitle" --default-item "$3" --menu "$4" $h $w $((($#-1)/3)) "${@:5}" 3>&1 1>&2 2>&3 3>&-
 }
 
 function yesnoBox {
@@ -65,7 +75,7 @@ function inputBox {
     if [ "$1" -gt "0" ]; then h=$1; fi
     if [ "$2" -gt "0" ]; then w=$2; fi
 
-    echo $(dialog --backtitle "$backtitle" --inputbox "$3" $h $w 3>&1 1>&2 2>&3 3>&-)
+    dialog --backtitle "$backtitle" --inputbox "$3" $h $w 3>&1 1>&2 2>&3 3>&-
 }
 
 function checklistBox {

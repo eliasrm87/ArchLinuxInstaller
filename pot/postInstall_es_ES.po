@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-28 22:20+0100\n"
+"POT-Creation-Date: 2020-02-25 17:27+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,24 +10,202 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: postInstall.sh\n"
 
-#: ../postInstall.sh:10
+#: ../postInstall.sh:16
+#, sh-format
+msgid "Internet connection"
+msgstr "Conexión a Internet"
+
+#: ../postInstall.sh:19
+#, sh-format
+msgid "Do you want to connect to a WiFi network?"
+msgstr "¿Desea conectarse a una red WiFi?"
+
+#: ../postInstall.sh:22
+#, sh-format
+msgid "Select the WiFi network you want to connect to"
+msgstr "Seleccione la red WiFi a la que desea conectarse"
+
+#: ../postInstall.sh:31
+#, sh-format
+msgid "ERROR"
+msgstr "ERROR"
+
+#: ../postInstall.sh:31
+#, sh-format
+msgid ""
+"No internet connection found.\\n\\nPlug in a network cable and try this step "
+"again"
+msgstr ""
+"No se ha detectado una conexión a Internet.\n"
+"\n"
+"Conecta un cable de red y repite este paso de nuevo"
+
+#: ../postInstall.sh:43
+#, sh-format
+msgid "Users"
+msgstr "Usuarios"
+
+#: ../postInstall.sh:45
+#, sh-format
+msgid "New user"
+msgstr "Crear usuario"
+
+#: ../postInstall.sh:45
+#, sh-format
+msgid "Do you want to create a new user?"
+msgstr "¿Desea crear un nuevo usuario?"
+
+#: ../postInstall.sh:47
+#, sh-format
+msgid "Type name for the new user"
+msgstr "Introduce tu nombre de usuario"
+
+#: ../postInstall.sh:57
+#, sh-format
+msgid "Enable sudo"
+msgstr "Habilitar sudo"
+
+#: ../postInstall.sh:57
+#, sh-format
+msgid "Do you want to enable wheel group on sudoers?"
+msgstr "¿Desea activar el grupo wheel en sudoers?"
+
+#: ../postInstall.sh:65
+#, sh-format
+msgid "X11 graphical server"
+msgstr "Servidor gráfico X11"
+
+#: ../postInstall.sh:67
+#, sh-format
+msgid "Do you want to install X11 graphical server?"
+msgstr "¿Desea instalar servidor gráfico X11?"
+
+#: ../postInstall.sh:72
+#, sh-format
+msgid "Select your graphics card manufacturer"
+msgstr "Seleccione el fabricante de su tarjeta gráfica"
+
+#: ../postInstall.sh:72
+#, sh-format
+msgid "None"
+msgstr "Ninguno"
+
+#: ../postInstall.sh:123
+#, sh-format
+msgid "X11 keyboard"
+msgstr "Teclado X11"
+
+#: ../postInstall.sh:126
+#, sh-format
+msgid "Keyboard"
+msgstr "Teclado"
+
+#: ../postInstall.sh:126
+#, sh-format
+msgid "Do you want to set keyboard distribution for X11 to 'es'?"
+msgstr "¿Desea establecer distribución de teclado para X11 como 'es'?"
+
+#: ../postInstall.sh:134
+#, sh-format
+msgid "Repositories"
+msgstr "Repositorios"
+
+#: ../postInstall.sh:138
+#, sh-format
 msgid "Do you want to enable %s repository?"
 msgstr "¿Desea activar repositorio %s?"
 
-#: ../postInstall.sh:22
+#: ../postInstall.sh:153
+#, sh-format
+msgid "Do you want to enable pacman colors?"
+msgstr "¿Desea activar los colores de pacman?"
+
+#: ../postInstall.sh:160
+#, sh-format
+msgid "Sound"
+msgstr "Audio"
+
+#: ../postInstall.sh:162
+#, sh-format
+msgid "Do you want to install Pulseaudio?"
+msgstr "¿Desea instalar Pulseaudio?"
+
+#: ../postInstall.sh:170 ../postInstall.sh:172
+#, sh-format
+msgid "Fonts"
+msgstr "Fuentes"
+
+#: ../postInstall.sh:172
+#, sh-format
+msgid "Do you want tu install recomended fonts?"
+msgstr "¿Desea instalar fuentes recomendadas?"
+
+#: ../postInstall.sh:180 ../postInstall.sh:182
+#, sh-format
+msgid "Desktop"
+msgstr "Escritorio"
+
+#: ../postInstall.sh:182
+#, sh-format
+msgid "Do you want to install a desktop enviroment?"
+msgstr "¿Desea instalar un escritorio?"
+
+#: ../postInstall.sh:185
+#, sh-format
+msgid "Select your favorite desktop"
+msgstr "Seleccione su escritorio favorito"
+
+#: ../postInstall.sh:215
+#, sh-format
+msgid "Select your favorite session manager"
+msgstr "Seleccione su gestor de inicio de sesión favorito"
+
+#: ../postInstall.sh:239
+#, sh-format
+msgid "Installation finished"
+msgstr "Instalación finalizada"
+
+#: ../postInstall.sh:239
+#, sh-format
+msgid ""
+"Installation is finised. If everthing went fine, after reboot, you will be "
+"able to start your brand new system.\\n\\nDo you want to reboot now?"
+msgstr ""
+"Instalación finalizada. Si todo ha salido bien, después de reiniciar podrás "
+"iniciar el sistema recién instalado\\n\\nDeseas reiniciar ahora?"
+
+#: ../postInstall.sh:251
+#, sh-format
+msgid "Error:"
+msgstr "Error:"
+
+#: ../postInstall.sh:251
+#, sh-format
+msgid "An unexpected error has occurred"
+msgstr "Ha ocurrido un error inesperado"
+
+#: ../postInstall.sh:252
+#, sh-format
+msgid "Press any key to continue"
+msgstr "Presione cualquier tecla para continuar"
+
+#: ../postInstall.sh:259
+#, sh-format
 msgid "ArchLinux instalation script %s"
 msgstr "Script de instalación de ArchLinux %s"
 
-#: ../postInstall.sh:24
+#: ../postInstall.sh:261
+#, sh-format
 msgid "Welcome back"
 msgstr "Bienvenido de nuevo"
 
-#: ../postInstall.sh:24
+#: ../postInstall.sh:261
+#, sh-format
 msgid ""
 "Base system installation is finised. Now you can proceed to configure and "
 "install some other packages."
@@ -35,126 +213,76 @@ msgstr ""
 "La instalación del sistema base ha finalizado. A continuación se procederá a "
 "configurar el sistema e instalar algunos paquetes."
 
-#: ../postInstall.sh:30
-msgid "Internet connection"
-msgstr "Conexión a Internet"
+#: ../postInstall.sh:271
+#, sh-format
+msgid "Select installation step:"
+msgstr "Selecciona paso de instalación:"
 
-#: ../postInstall.sh:33
-msgid "Do you want to connect to any WiFi network?"
-msgstr "¿Desea conectarse a alguna red WiFi?"
+#: ../postInstall.sh:272
+#, sh-format
+msgid "Network setup"
+msgstr "Configurar red"
 
-#: ../postInstall.sh:36
-msgid "Select the WiFi network you want to connect to"
-msgstr "Seleccione la red WiFi a la que desea conectarse"
+#: ../postInstall.sh:273
+#, sh-format
+msgid "Install xdg-user-dirs"
+msgstr "Instalar xdg-user-dirs"
 
-#: ../postInstall.sh:43
-msgid "ERROR"
-msgstr "ERROR"
+#: ../postInstall.sh:274
+#, sh-format
+msgid "Setup users"
+msgstr "Configurar ususarios"
 
-#: ../postInstall.sh:43
-msgid ""
-"No internet connection found.\\n\\nPlug in a network cable or press ENTER "
-"for trying again to connect to a WiFi network."
-msgstr ""
-"No se ha detectado una conexión a Internet.\n"
-"\n"
-"Conecte el equipo por cable o pulse ENTER para contectarse a una WiFi."
+#: ../postInstall.sh:275
+#, sh-format
+msgid "Install X11 server"
+msgstr "Instalar servidor X11"
 
-#: ../postInstall.sh:54
-msgid "Users"
-msgstr "Usuarios"
+#: ../postInstall.sh:276
+#, sh-format
+msgid "Setup X11 keyboard"
+msgstr "Configurar teclado X11"
 
-#: ../postInstall.sh:56
-msgid "New user"
-msgstr "Crear usuario"
+#: ../postInstall.sh:277
+#, sh-format
+msgid "Setup repositories"
+msgstr "Configurar repositorios"
 
-#: ../postInstall.sh:56
-msgid "Do you want to create a new user?"
-msgstr "¿Desea crear un nuevo usuario?"
+#: ../postInstall.sh:278
+#, sh-format
+msgid "Install sound system"
+msgstr "Instalar sistema de sonido"
 
-#: ../postInstall.sh:58
-msgid "Type name for the new user"
-msgstr "Introduce tu nombre de usuario"
+#: ../postInstall.sh:279
+#, sh-format
+msgid "Install recomended fonts"
+msgstr "Instalar fuentes recomendadas"
 
-#: ../postInstall.sh:68
-msgid "Enable sudo"
-msgstr "Habilitar sudo"
+#: ../postInstall.sh:280
+#, sh-format
+msgid "Install desktop"
+msgstr "Instalar escritorio"
 
-#: ../postInstall.sh:68
-msgid "Do you want to enable wheel group on sudoers?"
-msgstr "¿Desea activar el grupo wheel en sudoers?"
+#: ../postInstall.sh:281
+#, sh-format
+msgid "Finish instalation"
+msgstr "Finalizar instalación"
 
-#: ../postInstall.sh:75
-msgid "X11 graphical server"
-msgstr "Servidor gráfico X11"
+#: ../postInstall.sh:282
+#, sh-format
+msgid "Open terminal"
+msgstr "Abrir terminal"
 
-#: ../postInstall.sh:77
-msgid "Do you want to install X11 graphical server?"
-msgstr "¿Desea instalar servidor gráfico X11?"
+#: ../postInstall.sh:368
+#, sh-format
+msgid "Type 'exit' to return to menu:"
+msgstr "Escribe 'exit' para volver al menú:"
 
-#: ../postInstall.sh:82
-msgid "Select your graphics card manufacturer"
-msgstr "Seleccione el fabricante de su tarjeta gráfica"
+#~ msgid "Do you want to enable archlinuxfr repository?"
+#~ msgstr "¿Desea activar repositorio archlinuxfr?"
 
-#: ../postInstall.sh:82
-msgid "None"
-msgstr "Ninguno"
-
-#: ../postInstall.sh:131
-msgid "X11 keyboard"
-msgstr "Teclado X11"
-
-#: ../postInstall.sh:134
-msgid "Keyboard"
-msgstr "Teclado"
-
-#: ../postInstall.sh:134
-msgid "Do you want to set keyboard distribution for X11 to 'es'?"
-msgstr "¿Desea establecer distribución de teclado para X11 como 'es'?"
-
-#: ../postInstall.sh:141
-msgid "Repositories"
-msgstr "Repositorios"
-
-#: ../postInstall.sh:147
-msgid "Do you want to enable archlinuxfr repository?"
-msgstr "¿Desea activar repositorio archlinuxfr?"
-
-#: ../postInstall.sh:154
-msgid "Do you want to install yaourt?"
-msgstr "¿Desea instalar yaourt?"
-
-#: ../postInstall.sh:164
-msgid "Sound"
-msgstr "Audio"
-
-#: ../postInstall.sh:166
-msgid "Do you want to install Pulseaudio?"
-msgstr "¿Desea instalar Pulseaudio?"
-
-#: ../postInstall.sh:173 ../postInstall.sh:175
-msgid "Fonts"
-msgstr "Fuentes"
-
-#: ../postInstall.sh:175
-msgid "Do you want tu install recomended fonts?"
-msgstr "¿Desea instalar fuentes recomendadas?"
-
-#: ../postInstall.sh:181 ../postInstall.sh:183
-msgid "Desktop"
-msgstr "Escritorio"
-
-#: ../postInstall.sh:183
-msgid "Do you want to install a desktop enviroment?"
-msgstr "¿Desea instalar un escritorio?"
-
-#: ../postInstall.sh:186
-msgid "Select your favorite desktop"
-msgstr "Seleccione su escritorio favorito"
-
-#: ../postInstall.sh:216
-msgid "Select your favorite session manager"
-msgstr "Seleccione su gestor de inicio de sesión favorito"
+#~ msgid "Do you want to install yaourt?"
+#~ msgstr "¿Desea instalar yaourt?"
 
 #~ msgid "Type password for %s"
 #~ msgstr "Introduce la contraseña de para %s"
