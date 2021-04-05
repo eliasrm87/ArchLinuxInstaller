@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-25 17:27+0000\n"
+"POT-Creation-Date: 2021-04-05 21:17+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,12 +10,15 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ..\n"
 "X-Generator: Poedit 2.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: install.sh\n"
 
-#: ../install.sh:31
+#: ../install.sh:199
 #, sh-format
 msgid ""
 "Looks like you don't have Internet access and cannot find any WiFi interface"
@@ -23,17 +26,17 @@ msgstr ""
 "Parece que no tienes acceso a Internet y no se ha encontrado ninguna "
 "interfaz WiFi"
 
-#: ../install.sh:33
+#: ../install.sh:201
 #, sh-format
 msgid "Restarting dhcpcd..."
 msgstr "Reiniciando dhcpcd..."
 
-#: ../install.sh:41
+#: ../install.sh:209
 #, sh-format
 msgid "ERROR"
 msgstr "ERROR"
 
-#: ../install.sh:41
+#: ../install.sh:209
 #, sh-format
 msgid ""
 "Looks like you still don't have Internet access\\nEnsure that you are "
@@ -42,57 +45,57 @@ msgstr ""
 "Parece que sigues sin acceso a Internet\\nAsegúrate de que estés conectado y "
 "repite este paso o usa la terminal"
 
-#: ../install.sh:49
+#: ../install.sh:217
 #, sh-format
 msgid "Partitions - Mount points and format (%s)"
 msgstr "Particiones - Puntos de motaje y formato (%s)"
 
-#: ../install.sh:56
+#: ../install.sh:224
 #, sh-format
 msgid "Mount %s"
 msgstr "Montar %s"
 
-#: ../install.sh:56
+#: ../install.sh:224
 #, sh-format
 msgid "Do you want to specify a mount point for %s?"
 msgstr "¿Desea especificar un punto de montaje para %s?"
 
-#: ../install.sh:63
+#: ../install.sh:231
 #, sh-format
 msgid "Select the partition you want to be mounted as %s"
 msgstr "Seleccione la partición que desea montar en %s"
 
-#: ../install.sh:68
+#: ../install.sh:236
 #, sh-format
 msgid "Format"
 msgstr "Formatear"
 
-#: ../install.sh:68
+#: ../install.sh:236
 #, sh-format
 msgid "Do you want to format %s (%s)?"
 msgstr "¿Desea formatear %s (%s)?"
 
-#: ../install.sh:75
+#: ../install.sh:243
 #, sh-format
 msgid "Encrypt"
 msgstr "Cifrar"
 
-#: ../install.sh:75
+#: ../install.sh:243
 #, sh-format
 msgid "Do you want to encrypt %s (%s)?"
 msgstr "¿Desea cifrar %s (%s)?"
 
-#: ../install.sh:88
+#: ../install.sh:257
 #, sh-format
 msgid "Select the file system you want for %s"
 msgstr "Seleccione el sistema de archivos para formatear %s"
 
-#: ../install.sh:91 ../install.sh:140
+#: ../install.sh:260 ../install.sh:316
 #, sh-format
 msgid "WARNING!"
 msgstr "¡ATENCIÓN!"
 
-#: ../install.sh:91
+#: ../install.sh:260
 #, sh-format
 msgid ""
 "Are you sure that you want to format %s (%s) as %s?\\nALL DATA WILL BE LOST!"
@@ -100,57 +103,57 @@ msgstr ""
 "¿Está seguro de que desea formatear %s (%s) en %s?\n"
 "¡SE PERDERÁN TODOS LOS DATOS!"
 
-#: ../install.sh:116
+#: ../install.sh:288
 #, sh-format
 msgid "Partitions - Creation"
 msgstr "Particiones - Creación"
 
-#: ../install.sh:118 ../install.sh:129
+#: ../install.sh:290 ../install.sh:302
 #, sh-format
 msgid "Partitions"
 msgstr "Particiones"
 
-#: ../install.sh:118
+#: ../install.sh:290
 #, sh-format
 msgid "Do you want to edit partitions of any disk?"
 msgstr "¿Desea modificar las particiones de algún disco?"
 
-#: ../install.sh:120
+#: ../install.sh:293
 #, sh-format
 msgid "Select the disk you want to partition:"
 msgstr "Seleccione el disco que desea particionar:"
 
-#: ../install.sh:122
+#: ../install.sh:295
 #, sh-format
 msgid "Select the partition tool you want to use for partitioning %s:"
 msgstr "Seleccione la herramienta que desa usar para particionar %s:"
 
-#: ../install.sh:129
+#: ../install.sh:302
 #, sh-format
 msgid "Do you want to edit partitions of any other disk?"
 msgstr "¿Desea modificar las particiones de otro disco?"
 
-#: ../install.sh:134
+#: ../install.sh:309
 #, sh-format
 msgid "Partitions - SWAP"
 msgstr "Particiones - SWAP"
 
-#: ../install.sh:136
+#: ../install.sh:311
 #, sh-format
 msgid "SWAP"
 msgstr "SWAP"
 
-#: ../install.sh:136
+#: ../install.sh:311
 #, sh-format
 msgid "Do you want to use a partition as SWAP?"
 msgstr "¿Desea usar una partición como SWAP?"
 
-#: ../install.sh:138
+#: ../install.sh:314
 #, sh-format
 msgid "Select the partition you want to use as SWAP:"
 msgstr "Seleccione la partición que desea usar como SWAP:"
 
-#: ../install.sh:140
+#: ../install.sh:316
 #, sh-format
 msgid ""
 "Are you sure that you want to format %s as SWAP?\\nALL DATA WILL BE LOST!"
@@ -158,27 +161,27 @@ msgstr ""
 "¿Está seguro de que desea formatear y activar %s como SWAP?\n"
 "¡SE PERDERÁN TODOS LOS DATOS!"
 
-#: ../install.sh:151
+#: ../install.sh:329
 #, sh-format
 msgid "Base system installation"
 msgstr "Configuración del sistema base - Localización"
 
-#: ../install.sh:159
+#: ../install.sh:337
 #, sh-format
 msgid "Select packages you want to install:"
 msgstr "Seleccione los paquetes de desea instalar:"
 
-#: ../install.sh:160
+#: ../install.sh:338
 #, sh-format
 msgid "Specify any other packages you want to install (optional):"
 msgstr "Indique otros paquetes que desee instalar (opcional):"
 
-#: ../install.sh:163
+#: ../install.sh:341
 #, sh-format
 msgid "Summary"
 msgstr "Resumen"
 
-#: ../install.sh:163
+#: ../install.sh:341
 #, sh-format
 msgid ""
 "The following packages will be installed:\\n\\n%s\\n\\nDo you want to "
@@ -190,105 +193,225 @@ msgstr ""
 "\n"
 "¿Desea continuar?"
 
-#: ../install.sh:198
+#: ../install.sh:379
 #, sh-format
 msgid "Base system configuration - Keyboard"
 msgstr "Configuración del sistema base - Teclado"
 
-#: ../install.sh:200
+#: ../install.sh:382
 #, sh-format
 msgid "Select your keyboard distribution:"
 msgstr "Seleccione su esquema de teclado:"
 
-#: ../install.sh:207
+#: ../install.sh:391
 #, sh-format
 msgid "Base system configuration - Hostname"
 msgstr "Configuración del sistema base - Hostname"
 
-#: ../install.sh:209
+#: ../install.sh:393
 #, sh-format
 msgid "Type your host name"
 msgstr "Introduce un nombre para este equipo (hostname)"
 
-#: ../install.sh:215
+#: ../install.sh:401
 #, sh-format
 msgid "Base system configuration - Time zone"
 msgstr "Configuración del sistema base - Zona horaria"
 
-#: ../install.sh:220
+#: ../install.sh:407
 #, sh-format
 msgid "Select your time zone continent"
 msgstr "Seleccione el continente de su zona horaria"
 
-#: ../install.sh:221
+#: ../install.sh:409
 #, sh-format
 msgid "Select your time zone"
 msgstr "Seleccione su su zona horaria"
 
-#: ../install.sh:228
+#: ../install.sh:418
 #, sh-format
 msgid "Base system configuration - Localization"
 msgstr "Configuración del sistema base - Localización"
 
-#: ../install.sh:232
+#: ../install.sh:422
 #, sh-format
 msgid "Localization"
 msgstr "Localización"
 
-#: ../install.sh:232
+#: ../install.sh:422
 #, sh-format
 msgid "Do you want to change the localization?"
 msgstr "¿Desea cambiar la localización?"
 
-#: ../install.sh:237
+#: ../install.sh:428
 #, sh-format
 msgid "Select your localization"
 msgstr "Seleccione su localización"
 
-#: ../install.sh:247
+#: ../install.sh:440
 #, sh-format
 msgid "Boot loader - GRUB (%s)"
 msgstr "Cargador de arranque - GRUB (%s)"
 
-#: ../install.sh:249
+#: ../install.sh:442
 #, sh-format
 msgid "Boot loader"
 msgstr "Cargador de arranque"
 
-#: ../install.sh:249
+#: ../install.sh:442
 #, sh-format
 msgid "Do you want to install GRUB boot loader?"
 msgstr "¿Desea instalar cargador de arranque GRUB?"
 
-#: ../install.sh:260
+#: ../install.sh:454
 #, sh-format
 msgid "Select the disk where you want to install GRUB boot loader"
 msgstr ""
 "Seleccione el disco en el que desea instalar el cargador de arranque GRUB"
 
-#: ../install.sh:272
+#: ../install.sh:468
 #, sh-format
 msgid "Security"
 msgstr "Seguridad"
 
-#: ../install.sh:274
+#: ../install.sh:470
 #, sh-format
 msgid "Root password"
 msgstr "Contraseña para root"
 
-#: ../install.sh:274
+#: ../install.sh:470
 #, sh-format
 msgid "You will be asked for root password."
 msgstr ""
 "A continuación se le solicitará que introduzca la contraseña de super "
 "usuario."
 
-#: ../install.sh:288
+#: ../install.sh:488
+#, sh-format
+msgid "Users"
+msgstr "Usuarios"
+
+#: ../install.sh:490
+#, sh-format
+msgid "New user"
+msgstr "Crear usuario"
+
+#: ../install.sh:490
+#, sh-format
+msgid "Do you want to create a new user?"
+msgstr "¿Desea crear un nuevo usuario?"
+
+#: ../install.sh:492
+#, sh-format
+msgid "Type name for the new user"
+msgstr "Introduce tu nombre de usuario"
+
+#: ../install.sh:502
+#, sh-format
+msgid "Enable sudo"
+msgstr "Habilitar sudo"
+
+#: ../install.sh:502
+#, sh-format
+msgid "Do you want to enable wheel group on sudoers?"
+msgstr "¿Desea activar el grupo wheel en sudoers?"
+
+#: ../install.sh:512
+#, sh-format
+msgid "X11 graphical server"
+msgstr "Servidor gráfico X11"
+
+#: ../install.sh:514
+#, sh-format
+msgid "Do you want to install X11 graphical server?"
+msgstr "¿Desea instalar servidor gráfico X11?"
+
+#: ../install.sh:519
+#, sh-format
+msgid "Select your graphics card manufacturer"
+msgstr "Seleccione el fabricante de su tarjeta gráfica"
+
+#: ../install.sh:519
+#, sh-format
+msgid "None"
+msgstr "Ninguno"
+
+#: ../install.sh:572
+#, sh-format
+msgid "X11 keyboard"
+msgstr "Teclado X11"
+
+#: ../install.sh:575
+#, sh-format
+msgid "Keyboard"
+msgstr "Teclado"
+
+#: ../install.sh:575
+#, sh-format
+msgid "Do you want to set keyboard distribution for X11 to 'es'?"
+msgstr "¿Desea establecer distribución de teclado para X11 como 'es'?"
+
+#: ../install.sh:585
+#, sh-format
+msgid "Repositories"
+msgstr "Repositorios"
+
+#: ../install.sh:589
+#, sh-format
+msgid "Do you want to enable %s repository?"
+msgstr "¿Desea activar repositorio %s?"
+
+#: ../install.sh:606
+#, sh-format
+msgid "Do you want to enable pacman colors?"
+msgstr "¿Desea activar los colores de pacman?"
+
+#: ../install.sh:615
+#, sh-format
+msgid "Sound"
+msgstr "Audio"
+
+#: ../install.sh:617
+#, sh-format
+msgid "Do you want to install Pulseaudio?"
+msgstr "¿Desea instalar Pulseaudio?"
+
+#: ../install.sh:627 ../install.sh:629
+#, sh-format
+msgid "Fonts"
+msgstr "Fuentes"
+
+#: ../install.sh:629
+#, sh-format
+msgid "Do you want tu install recomended fonts?"
+msgstr "¿Desea instalar fuentes recomendadas?"
+
+#: ../install.sh:639 ../install.sh:641
+#, sh-format
+msgid "Desktop"
+msgstr "Escritorio"
+
+#: ../install.sh:641
+#, sh-format
+msgid "Do you want to install a desktop enviroment?"
+msgstr "¿Desea instalar un escritorio?"
+
+#: ../install.sh:644
+#, sh-format
+msgid "Select your favorite desktop"
+msgstr "Seleccione su escritorio favorito"
+
+#: ../install.sh:674
+#, sh-format
+msgid "Select your favorite session manager"
+msgstr "Seleccione su gestor de inicio de sesión favorito"
+
+#: ../install.sh:705
 #, sh-format
 msgid "Installation finished"
 msgstr "Instalación finalizada"
 
-#: ../install.sh:288
+#: ../install.sh:705
 #, sh-format
 msgid ""
 "Base system installation is finised. If everthing went fine, after reboot, "
@@ -300,32 +423,32 @@ msgstr ""
 "\n"
 "¿Desea desmontar unidades y reiniciar?"
 
-#: ../install.sh:305
+#: ../install.sh:716
 #, sh-format
 msgid "Error:"
 msgstr "Error:"
 
-#: ../install.sh:305
+#: ../install.sh:716
 #, sh-format
 msgid "An unexpected error has occurred"
 msgstr "Ha ocurrido un error inesperado"
 
-#: ../install.sh:306
+#: ../install.sh:717
 #, sh-format
 msgid "Press any key to continue"
 msgstr "Presione cualquier tecla para continuar"
 
-#: ../install.sh:313
+#: ../install.sh:724
 #, sh-format
 msgid "ArchLinux instalation script %s"
 msgstr "Script de instalación de ArchLinux %s"
 
-#: ../install.sh:315
+#: ../install.sh:726
 #, sh-format
 msgid "Welcome"
 msgstr "Bienvenido"
 
-#: ../install.sh:315
+#: ../install.sh:726
 #, sh-format
 msgid ""
 "This script works as a guide during Arch Linux installation process. You "
@@ -334,80 +457,170 @@ msgstr ""
 "Este script actúa como guia de apoyo durante el proceso de instalación de "
 "ArchLinux. En cualquier momento puede detenerlo presionando Ctrl+C"
 
-#: ../install.sh:325
+#: ../install.sh:736
 #, sh-format
 msgid "Select installation step:"
-msgstr "Seleccione paso de instalación:"
+msgstr "Selecciona paso de instalación:"
 
-#: ../install.sh:326
+#: ../install.sh:737
 #, sh-format
 msgid "Network setup"
 msgstr "Configurar red"
 
-#: ../install.sh:327
+#: ../install.sh:738
 #, sh-format
 msgid "Manage partitions"
 msgstr "Gestionar particiones"
 
-#: ../install.sh:328
+#: ../install.sh:739
 #, sh-format
 msgid "Mount partitions"
 msgstr "Montar particiones"
 
-#: ../install.sh:329
+#: ../install.sh:740
 #, sh-format
 msgid "Setup swap"
 msgstr "Configurar swap"
 
-#: ../install.sh:330
+#: ../install.sh:741
 #, sh-format
 msgid "Install base system"
 msgstr "Instalar sistema base"
 
-#: ../install.sh:331
+#: ../install.sh:742
 #, sh-format
 msgid "Setup keyboard"
 msgstr "Configurar teclado"
 
-#: ../install.sh:332
+#: ../install.sh:743
 #, sh-format
 msgid "Setup hostname"
 msgstr "Configurar nombre de equipo (hostname)"
 
-#: ../install.sh:333
+#: ../install.sh:744
 #, sh-format
 msgid "Setup time zone"
 msgstr "Configurar zona horaria"
 
-#: ../install.sh:334
+#: ../install.sh:745
 #, sh-format
 msgid "Setup localization"
 msgstr "Configurar localización"
 
-#: ../install.sh:335
+#: ../install.sh:746
 #, sh-format
 msgid "Setup root password"
 msgstr "Configurar contraseña para root"
 
-#: ../install.sh:336
+#: ../install.sh:747
+#, sh-format
+msgid "Install xdg-user-dirs"
+msgstr "Instalar xdg-user-dirs"
+
+#: ../install.sh:748
+#, sh-format
+msgid "Setup users"
+msgstr "Configurar ususarios"
+
+#: ../install.sh:749
+#, sh-format
+msgid "Install X11 server"
+msgstr "Instalar servidor X11"
+
+#: ../install.sh:750
+#, sh-format
+msgid "Setup X11 keyboard"
+msgstr "Configurar teclado X11"
+
+#: ../install.sh:751
+#, sh-format
+msgid "Setup repositories"
+msgstr "Configurar repositorios"
+
+#: ../install.sh:752
+#, sh-format
+msgid "Install sound system"
+msgstr "Instalar sistema de sonido"
+
+#: ../install.sh:753
+#, sh-format
+msgid "Install recomended fonts"
+msgstr "Instalar fuentes recomendadas"
+
+#: ../install.sh:754
+#, sh-format
+msgid "Install desktop"
+msgstr "Instalar escritorio"
+
+#: ../install.sh:755
 #, sh-format
 msgid "Install bootloader"
 msgstr "Instalar gestor de arranque"
 
-#: ../install.sh:337
+#: ../install.sh:756
 #, sh-format
 msgid "Finish installation"
-msgstr "FInalizar instalación"
+msgstr "Finalizar instalación"
 
-#: ../install.sh:338
+#: ../install.sh:757
 #, sh-format
 msgid "Open terminal"
 msgstr "Abrir terminal"
 
-#: ../install.sh:447
+#: ../install.sh:758
+#, sh-format
+msgid "Exit"
+msgstr "Salir"
+
+#: ../install.sh:842
 #, sh-format
 msgid "Type 'exit' to return to menu:"
 msgstr "Escriba \"exit\" para volver al menú:"
+
+#, sh-format
+#~ msgid "Internet connection"
+#~ msgstr "Conexión a Internet"
+
+#, sh-format
+#~ msgid "Do you want to connect to a WiFi network?"
+#~ msgstr "¿Desea conectarse a una red WiFi?"
+
+#, sh-format
+#~ msgid "Select the WiFi network you want to connect to"
+#~ msgstr "Seleccione la red WiFi a la que desea conectarse"
+
+#, sh-format
+#~ msgid ""
+#~ "No internet connection found.\\n\\nPlug in a network cable and try this "
+#~ "step again"
+#~ msgstr ""
+#~ "No se ha detectado una conexión a Internet.\n"
+#~ "\n"
+#~ "Conecta un cable de red y repite este paso de nuevo"
+
+#, sh-format
+#~ msgid ""
+#~ "Installation is finised. If everthing went fine, after reboot, you will "
+#~ "be able to start your brand new system.\\n\\nDo you want to reboot now?"
+#~ msgstr ""
+#~ "Instalación finalizada. Si todo ha salido bien, después de reiniciar "
+#~ "podrás iniciar el sistema recién instalado\\n\\nDeseas reiniciar ahora?"
+
+#, sh-format
+#~ msgid "Welcome back"
+#~ msgstr "Bienvenido de nuevo"
+
+#, sh-format
+#~ msgid ""
+#~ "Base system installation is finised. Now you can proceed to configure and "
+#~ "install some other packages."
+#~ msgstr ""
+#~ "La instalación del sistema base ha finalizado. A continuación se "
+#~ "procederá a configurar el sistema e instalar algunos paquetes."
+
+#, sh-format
+#~ msgid "Finish instalation"
+#~ msgstr "Finalizar instalación"
 
 #, sh-format
 #~ msgid "WiFi menu"
@@ -416,3 +629,15 @@ msgstr "Escriba \"exit\" para volver al menú:"
 #, sh-format
 #~ msgid "Create partitions"
 #~ msgstr "Crear articiones"
+
+#~ msgid "Do you want to enable archlinuxfr repository?"
+#~ msgstr "¿Desea activar repositorio archlinuxfr?"
+
+#~ msgid "Do you want to install yaourt?"
+#~ msgstr "¿Desea instalar yaourt?"
+
+#~ msgid "Type password for %s"
+#~ msgstr "Introduce la contraseña de para %s"
+
+#~ msgid "Select your language"
+#~ msgstr "Seleccione su idioma"
