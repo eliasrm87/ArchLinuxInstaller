@@ -566,19 +566,6 @@ installX11() {
     fi
 }
 
-setupX11Keyboard() {
-    set -e
-
-    backtitle="$(eval_gettext "X11 keyboard")"
-
-    #Hay que mejorar esto para que soporte varios idiomas
-    yesno=$(yesnoBox 0 0 "$(eval_gettext "Keyboard")" "$(eval_gettext "Do you want to set keyboard distribution for X11 to 'es'?")")
-    if [ "$yesno" == "0" ]; then
-        reset
-        cp 10-keyboard.conf -O /mnt/etc/X11/xorg.conf.d/
-    fi
-}
-
 enableRepo() {
     set -e
 
@@ -677,12 +664,12 @@ installDesktop() {
         case "$sessionManager" in
         gdm)
             arch-chroot /mnt pacman --noconfirm -S gdm
-            arch-chroot /mnt systemctl disable sddm
+            arch-chroot /mnt systemctl disable sddm || true
             arch-chroot /mnt systemctl enable gdm.service
             ;;
         sddm)
             arch-chroot /mnt pacman --noconfirm -S sddm sddm-kcm
-            arch-chroot /mnt systemctl disable gdm.service
+            arch-chroot /mnt systemctl disable gdm.service || true
             arch-chroot /mnt systemctl enable sddm
             ;;
         *)
@@ -817,27 +804,24 @@ while true; do
             installX11
             ;;
         14)
-            setupX11Keyboard
-            ;;
-        15)
             setupRepositories
             ;;
-        16)
+        15)
             installSound
             ;;
-        17)
+        16)
             installFonts
             ;;
-        18)
+        17)
             installDesktop
             ;;
-        19)
+        18)
             installBootloader
             ;;
-        20)
+        19)
             finishInstallation
             ;;
-        21)
+        20)
             errorCmd="quiet"
             eval_gettext "Type 'exit' to return to menu:"
             bash && step=$((step * -1))
@@ -851,9 +835,9 @@ while true; do
 
     # shellcheck disable=SC2181
     if [ "$?" == "0" ]; then
-        if [ "$step" == "20" ]; then
+        if [ "$step" == "19" ]; then
             exit 0
-        elif [ "$step" -lt "21" ]; then
+        elif [ "$step" -lt "20" ]; then
             step=$((step+1))
         fi
     else
