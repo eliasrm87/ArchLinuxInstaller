@@ -10,6 +10,3 @@
     ./install.sh
 
 Development version available on [development](https://github.com/eliasrm87/ArchLinuxInstaller/tree/development) branch.
-
-**Instrucciones de uso disponibles en español en** [TecnoySoft](https://tecnoysoft.com/es/instalacion-de-arch-linux)
-
